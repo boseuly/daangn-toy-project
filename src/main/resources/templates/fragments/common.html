@@ -11,22 +11,26 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <!-- header 관련 css -->
-    <link href="headers.css" th:href="@{/css/header.css}" rel="stylesheet">
+    <link href="headers.css" th:href="@{/css/common/header.css}" rel="stylesheet">
     <title th:text="${title}"></title>
 </head>
 <body>
 
-<header class="p-3 mb-3 border-bottom" th:fragment="header()">
+<header class="p-3 mb-3" th:fragment="header()">
     <div class="container d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
         <a href="#" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none" th:href="@{/}" aria-expanded="false">
             <img src="https://dnvefa72aowie.cloudfront.net/karrot-cs/etc/202007/0cf1d10235c37b2635c02719125da37cc1bd632518198b1e1da7f5a364156540.png"
                  alt="mdo" width="100" height="30"></img>
         </a>
-
-        <div class="d-flex justify-content-end ">
-            <form class="col-lg-4 mb-3 mb-lg-0 me-lg-3" th:method="get">
-                <input type="search" class="form-control" placeholder="물품이나 동네를 검색해보세요." aria-label="Search">
-                <button type="submit" class="btn btn-outline-white me-2">검색하기</button>
+        <div class="d-flex justify-content-end">
+            <form class="row g-3 row justify-content-end" method="get" th:action="@{/board/list}">
+                <div class="col-auto">
+                    <label for="searchText" class="visually-hidden">검색</label>
+                    <input type="text" class="form-control w-60" id="searchText" name="searchText" placeholder="물품이나 동네를 입력하세요" th:value="${param.searchText}">
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-outline-secondary">검색하기</button>
+                </div>
             </form>
             <div class="col-md-3 text-end">
                 <button type="submit" class="btn btn-outline-white me-2">Logout</button> <!-- login을 한 경우 나온다. -->
