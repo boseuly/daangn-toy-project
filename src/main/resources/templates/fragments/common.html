@@ -1,6 +1,7 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head(title)">
     <!-- Required meta tags -->
     <meta charset="UTF-8">
@@ -14,7 +15,7 @@
     <link href="headers.css" th:href="@{/css/common/header.css}" rel="stylesheet">
     <title th:text="${title}"></title>
     <!-- home -->
-    <link href="home.css" th:href="@{css/home/home.css}" rel="stylesheet">
+    <link href="home.css" th:href="@{/css/home/home.css}" rel="stylesheet">
 </head>
 <body>
 
@@ -34,16 +35,9 @@
                     <button type="submit" class="btn btn-outline-secondary">검색하기</button>
                 </div>
             </form>
-            <div class="col-md-3 text-end">
-                <button type="submit" class="btn btn-outline-white me-2">Logout</button> <!-- login을 한 경우 나온다. -->
-                <a type="button" class="btn btn-outline-white me-2" th:href="@{/account/login}">Login</a>  <!-- logout을 한 경우 나온다. -->
-
-                <!--
-                <form class="form-inline" sec:authorize="isAuthenticated()" method="post" th:action="@{/logout}">
-                    <button type="submit" class="btn btn-outline-white">Sign-up</button>      logout을 한 경우 나온다.
-                </form>
-                -->
-
+            <div class="col-md-2 text-end">
+                <a type="button" class="btn btn-outline-white me-2" th:if="${#strings.isEmpty(session.access_token)}" th:href="@{/account/login}">Login</a>  <!-- logout을 한 경우 나온다. -->
+                <a type="button" class="btn btn-outline-white me-2" th:if="${not #strings.isEmpty(session.access_token)}" th:href="@{/logout}">Logout</a>    <!-- 정보가 있으면 true -->
             </div>
         </div>
     </div>

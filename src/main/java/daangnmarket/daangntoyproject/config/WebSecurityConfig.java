@@ -28,7 +28,7 @@ public class WebSecurityConfig {
         http
                 .csrf().disable()   // 테스트를 위해서 .csrf().disabled()를 했지만 실제로는 이렇게 하면 보안 취약해짐...
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/account/signup","/css/**", "/api/**").permitAll() // 해당 페이지는 모든 사람들이 접속할 수 있는 권한을 부여한다.
+                        .antMatchers("/", "/account/signup","/css/**", "/api/**", "/oauth/**").permitAll() // 해당 페이지는 모든 사람들이 접속할 수 있는 권한을 부여한다.
                         .anyRequest().authenticated()   // 만약 그냥 "/"만 해주면 css 적용이 안 됨. 따라서 "/css/**"를 해줌으로써 css폴더 안에 있는 하위 파일들을 다 가져오도록 한다.
                 )
                 .formLogin((form) -> form
@@ -65,4 +65,5 @@ public class WebSecurityConfig {
     public static PasswordEncoder passwordEncoder() {  // 처음에 public 으로만 되어 있었는데 BeanCurrentlyInCreationException 오류가 뜸
         return new BCryptPasswordEncoder();            // public static으로 바꿔줘야 오류 해결 됨
     }
+
 }

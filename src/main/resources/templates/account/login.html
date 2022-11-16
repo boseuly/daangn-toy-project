@@ -12,12 +12,12 @@
 <body>
 
     <form class="form-signin" th:action="@{/account/login}" method="post" style="margin-top: 30px;">
-        <a th:href="@{/}"><img class="mb-4 ml-4" src="https://dnvefa72aowie.cloudfront.net/karrot-cs/etc/202007/0cf1d10235c37b2635c02719125da37cc1bd632518198b1e1da7f5a364156540.png" alt="" width="130" height="60"></a>
+        <a th:href="@{/}"><img class="mb-4 ml-4" src="https://dnvefa72aowie.cloudfront.net/karrot-cs/etc/202007/0cf1d10235c37b2635c02719125da37cc1bd632518198b1e1da7f5a364156540.png" alt="" width="150" height="60"></a>
         <!--경고창-->
         <div th:if="${param.error}" class="alert alert-danger" role="alert">
             Invalid username and password.
         </div>
-        <div th:if="${param.logout}" class="alert alert-light" role="alert">
+        <div th:if="${param.logout}" class="alert alert-warning" role="alert">
             You have been logged out.
         </div>
         <!--경고창 끝-->
@@ -37,7 +37,15 @@
             </label>
         </div>
         <button class="w-100 btn btn-lg btn-outline-orange" type="submit">로그인</button>
-        <a class="w-100 btn btn-lg btn-outline-black mt-5" type="button" th:href="@{/account/signup}">아이디가 없으신가요?</a>
+        <div class="d-flex justify-content-center" style="margin-top: 50px;">아이디가 없으신가요?</div>
+
+        <!-- 일반 회원가입 -->
+        <a class="w-100 btn btn-lg btn-outline-black mt-5" type="button" th:href="@{/account/signup}">회원가입</a>
+
+        <!-- 카카오 로그인 -->
+        <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=3b9ab37490257b10f89f741a7912ceb7&redirect_uri=http://localhost:8080/oauth/kakao&response_type=code&scope=account_email, profile_nickname">
+            <img class="rounded mx-auto d-block" th:src="@{https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png}" alt="" style="height:60px"/>
+        </a>
     </form>
 </body>
 </html>
