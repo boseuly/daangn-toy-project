@@ -13,6 +13,8 @@
     <!-- header 관련 css -->
     <link href="headers.css" th:href="@{/css/common/header.css}" rel="stylesheet">
     <title th:text="${title}"></title>
+    <!-- home -->
+    <link href="home.css" th:href="@{css/home/home.css}" rel="stylesheet">
 </head>
 <body>
 
@@ -47,6 +49,42 @@
     </div>
 </header>
 
-
+    <footer class="pt-4 my-md-5 pt-md-5 border-top" th:fragment="footer">
+        <div class="row">
+            <div class="col-12 col-md">
+                <img class="mb-2" src="https://d1unjqcospf8gs.cloudfront.net/favicon.ico" alt="" width="30" height="28">
+                <small class="d-block mb-3 text-muted">&copy; 2017–2022</small>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Features</h5>
+                <ul class="list-unstyled text-small">
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Resources</h5>
+                <ul class="list-unstyled text-small">
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>About</h5>
+                <ul class="list-unstyled text-small">
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Locations</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Terms</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
