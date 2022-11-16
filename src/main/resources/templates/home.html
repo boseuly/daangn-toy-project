@@ -2,21 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/common :: head('당근마켓')">
-    <link href="/css/home/home.css" th:href="@{css/home/home.css}">
+<head th:insert="~{fragments/common :: head('당근마켓')}">
 </head>
 <body>
     <header th:replace="fragments/common ::header()"></header>
-    <div class="position-relative overflow-hidden h-100 p-3 p-md-5 m-md-3 text-center bg-light bg-image"
-    style="background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/home/main/3x/image-top-d6869a79bc4cb58ea59aa5a408decfdf4a4ba60ac639837081da12861083cdbb.webp');
-     background-size: 804px 685px; background-repeat: no-repeat; width: 100%;">
+    <div class="position-relative overflow-hidden p-3 p-md-5 text-center bg-image home-center-image1"
+    style="background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/home/main/3x/image-top-d6869a79bc4cb58ea59aa5a408decfdf4a4ba60ac639837081da12861083cdbb.webp');">
         <div class="col-md-7 p-lg-5 mx-auto my-5">
             <h1 class="display-4 fw-normal" style="margin-left: 50%;">당신 근처의<br>당근마켓</h1>
             <p class="lead fw-normal" style="margin-left: 50%;">중고 거래부터 동네 정보까지, 이웃과 함께해요.<br>가깝고 따뜻한 당신의 근처를 만들어요.</p>
         </div>
     </div>
-    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-        <div class="col-md-8 p-lg-5 mx-auto my-5">
+    <div class="position-relative overflow-hidden p-3 p-md-5 text-center home-center-image2"
+         style="background-image: url('https://d1unjqcospf8gs.cloudfront.net/assets/home/main/3x/image-1-cc678e9a217b96f5cb459f7f0684f5ba67706f9889801618b8cf879fbc2c0ea7.webp');">
+        <div class="col-md-7 p-lg-5 my-5">
             <h1 class="display-4 fw-normal">우리 동네<br>중고 직거래 마켓</h1>
             <p class="lead fw-normal">동네 주민들과 가깝고 따뜻한 거래를
                 지금 경험해보세요.</p>
@@ -24,6 +23,8 @@
         <div class="product-device shadow-sm d-none d-md-block"></div>
         <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
     </div>
-
+    <div class="container">
+        <footer th:replace="fragments/common::footer"></footer>
+    </div>
 </body>
 </html>
