@@ -11,8 +11,9 @@
 </head>
 <body>
 
-<form class="form-signin" th:action="@{/account/login}" method="post" style="margin-top: 30px;">
+<form class="form-signin" style="margin-top: 30px;">
   <a th:href="@{/}"><img class="mb-4 ml-4" src="https://dnvefa72aowie.cloudfront.net/karrot-cs/etc/202007/0cf1d10235c37b2635c02719125da37cc1bd632518198b1e1da7f5a364156540.png" alt="" width="130" height="60"></a>
+  <div th:replace="fragments/signup-modal :: resultModal('회원가입 성공', '당근마켓 회원가입에 성공하였습니다. 다시 로그인 해주세요.')"></div>
   <!--경고창-->
   <div th:if="${param.error}" class="alert alert-danger" role="alert">
     Invalid username and password.
@@ -22,16 +23,40 @@
   </div>
   <!--경고창 끝-->
 
-  <div class="form-floating">
-    <input type="text" class="form-control" id="username" name="username" placeholder="username">
-    <label for="username">Username</label>
+  <div class="form-floating mb-1">
+    <input type="text" class="form-control" id="userId" name="userId" placeholder="userId">
+    <label for="userId">아이디</label>
+  </div>
+  <div class="form-floating mb-1">
+    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="nickname">
+    <label for="nickname">닉네임</label>
+  </div>
+  <div class="form-floating mb-1">
+    <input type="text" class="form-control" id="email" name="email" placeholder="email">
+    <label for="email">이메일</label>
   </div>
   <div class="form-floating">
-    <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="Password">
-    <label for="floatingPassword">Password</label>
+    <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Password">
+    <label for="userPassword">패스워드</label>
   </div>
+  <button class="w-100 btn btn-lg btn-outline-orange" type="button" th:onclick="userSignup()">가입하기</button>
 
-  <button class="w-100 btn btn-lg btn-outline-orange" type="submit">가입하기</button>
+
+
+
+
+  <!-- 카카오 회원가입 -->
+  <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=3b9ab37490257b10f89f741a7912ceb7&redirect_uri=http://localhost:8080/oauth/kakao&response_type=code&scope=account_email, profile_nickname, profile_image">
+    <img class="rounded mx-auto d-block" th:src="@{https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png}" alt="" style="height:60px"/>
+  </a>
+
 </form>
+
+<!-- js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script th:src="@{/js/account/account.js}"></script>
+
 </body>
 </html>
