@@ -13,8 +13,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
+
 @Service
-public class KakaoService {
+public class KakaoOAuthService {
     public String getToken(String code) throws IOException {
         // 인가코드로 토큰받기
         /*
@@ -172,30 +173,30 @@ public class KakaoService {
         return result;
     }
 
-    // 로그아웃 기능
-    public void kakaoLogout(String access_Token) {
-        String reqURL = "https://kakao.api.com/user/logout";
-        try {
-            URL url = new URL(reqURL);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+//    // 로그아웃 기능 -> spring security 에서
+//    public void kakaoLogout(String access_Token) {
+//        String reqURL = "https://kakao.api.com/user/logout";
+//        try {
+//            URL url = new URL(reqURL);
+//            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//            conn.setRequestMethod("POST");
+//            conn.setRequestProperty("Authorization", "Bearer " + access_Token);
+//
+//            int responseCode = conn.getResponseCode();
+//            System.out.println("responseCode : " + responseCode);
+//
+//            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//
+//            String result = "";
+//            String line = "";
+//
+//            while ((line = br.readLine()) != null) {
+//                result += line;
+//            }
+//            System.out.println("Logout 결과 : " + result);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
-            int responseCode = conn.getResponseCode();
-            System.out.println("responseCode : " + responseCode);
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-
-            String result = "";
-            String line = "";
-
-            while ((line = br.readLine()) != null) {
-                result += line;
-            }
-            System.out.println("Logout 결과 : " + result);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
 }

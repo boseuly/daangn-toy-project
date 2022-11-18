@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Modal -->
+<div th:fragment="resultModal(title, content)" class="modal fade" id="resultModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel" th:text="${title}">Modal title</h5>
+        <button type="button" class="btn-close modalClose" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" th:text="${content}">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-black modalClose" data-bs-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
