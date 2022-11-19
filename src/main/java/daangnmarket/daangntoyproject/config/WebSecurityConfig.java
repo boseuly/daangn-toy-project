@@ -8,8 +8,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.ldap.EmbeddedLdapServerContextSourceFactoryBean;
+import org.springframework.security.config.ldap.LdapBindAuthenticationManagerFactory;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
@@ -30,13 +33,14 @@ public class WebSecurityConfig  {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/account/signup","/css/**", "/images/**","/js/**", "/api/**", "/oauth/**").permitAll() // 해당 페이지는 모든 사람들이 접속할 수 있는 권한을 부여한다.
+                        .antMatchers("/", "/account/signup",
+                                "/css/**", "/images/**",
+                                "/js/**", "/api/**", "/oauth/**").permitAll() // 해당 페이지는 모든 사람들이 접속할 수 있는 권한을 부여한다.
                         .anyRequest().authenticated()   // 만약 그냥 "/"만 해주면 css 적용이 안 됨. 따라서 "/css/**"를 해줌으로써 css폴더 안에 있는 하위 파일들을 다 가져오도록 한다.
                 )
                 .formLogin((form) -> form
@@ -53,6 +57,7 @@ public class WebSecurityConfig  {
     public static PasswordEncoder passwordEncoder() {  // 처음에 public 으로만 되어 있었는데 BeanCurrentlyInCreationException 오류가 뜸
         return new BCryptPasswordEncoder();            // public static으로 바꿔줘야 오류 해결 됨
     }
+
 
 
 //
