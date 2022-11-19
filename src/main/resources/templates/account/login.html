@@ -22,14 +22,13 @@
         <!--경고창 끝-->
 
         <div class="form-floating mb-1">
-            <input type="text" class="form-control" id="user_id" name="user_id" placeholder="id">
-            <label for="user_id">ID</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="id">
+            <label for="username">ID</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="user_password" name="user_password" placeholder="userPassword">
-            <label for="user_password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="userPassword">
+            <label for="password">Password</label>
         </div>
-
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" value="remember-me"> 아이디 기억하기
@@ -43,7 +42,7 @@
 
         <!-- 카카오 로그인 -->
         <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=3b9ab37490257b10f89f741a7912ceb7&redirect_uri=http://localhost:8080/oauth/kakao&response_type=code&scope=account_email, profile_nickname, profile_image">
-            <img class="rounded mx-auto d-block" th:src="@{https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png}" alt="" style="height:60px"/>
+            <img class="rounded mx-auto d-block" th:src="@{/images/kakao-login.png}" alt="" style="height:60px"/>
         </a>
     </form>
 </body>

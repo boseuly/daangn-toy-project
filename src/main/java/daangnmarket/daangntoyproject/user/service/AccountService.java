@@ -1,7 +1,6 @@
 package daangnmarket.daangntoyproject.user.service;
 
 import daangnmarket.daangntoyproject.config.WebSecurityConfig;
-import daangnmarket.daangntoyproject.user.controller.AccountController;
 import daangnmarket.daangntoyproject.user.domain.Role;
 import daangnmarket.daangntoyproject.user.domain.User;
 import daangnmarket.daangntoyproject.user.model.UserDto;
@@ -17,12 +16,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class AccountService {
@@ -30,16 +26,15 @@ public class AccountService {
     private KakaoOAuthService kakaoService;
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
-//    private AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     public AccountService(KakaoOAuthService kakaoService, UserRepository userRepository
-                    , PasswordEncoder passwordEncoder //, AuthenticationManager authenticationManager
-                           ){
+                    , PasswordEncoder passwordEncoder , AuthenticationManager authenticationManager){
         this.kakaoService = kakaoService;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-//        this.authenticationManager = authenticationManager;
+        this.authenticationManager = authenticationManager;
     }
 
     public void kakaoLogin(String code) throws IOException {
@@ -65,8 +60,9 @@ public class AccountService {
             userRepository.save(kakaoUser);
         }
 
-        // 로그인 처리
+//        // 로그인 처리
         Authentication kakaoUsernamePassword = new UsernamePasswordAuthenticationToken(kakaoId, password);  // Collection<? extends GrantedAuthority> authorities 인수를 넣어줘야 인증이 완료 되는데, 안 넣어줘서 그런 듯
+        System.out.println("kakao 로그인 처리1 : "+kakaoUsernamePassword);
 //        Authentication authentication = authenticationManager.authenticate(kakaoUsernamePassword);
         SecurityContextHolder.getContext().setAuthentication(kakaoUsernamePassword);
 
@@ -76,7 +72,7 @@ public class AccountService {
         logger.info("AccountService - signup(userDto={})", userDto);
         ResponseEntity<Object> responseEntity = null;
         // email과 userId 중복 확인해야 한다.
-        UserDto data = userRepository.findByUserIdAndEmail(userDto.getUserId(), userDto.getEmail());
+        UserDto data = userRepository.findByUserIdOrEmail(userDto.getUserId(), userDto.getEmail());
 
         if(data == null){
             // 회원가입 진행
