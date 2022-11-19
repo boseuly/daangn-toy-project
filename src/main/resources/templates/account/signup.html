@@ -40,14 +40,12 @@
     <label for="userPassword">패스워드</label>
   </div>
   <button class="w-100 btn btn-lg btn-outline-orange" type="button" th:onclick="userSignup()">가입하기</button>
+  <div class="d-flex justify-content-center" style="margin-top: 50px;">이미 회원가입을 했나요?</div>
 
-
-
-
-
+  <a class="w-100 btn btn-lg btn-outline-black mt-5" type="button" th:href="@{/account/login}">로그인</a>
   <!-- 카카오 회원가입 -->
   <a class="p-2" href="https://kauth.kakao.com/oauth/authorize?client_id=3b9ab37490257b10f89f741a7912ceb7&redirect_uri=http://localhost:8080/oauth/kakao&response_type=code&scope=account_email, profile_nickname, profile_image">
-    <img class="rounded mx-auto d-block" th:src="@{https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_narrow.png}" alt="" style="height:60px"/>
+    <img class="rounded mx-auto d-block" th:src="@{/images/kakao-login.png}" alt="" style="height:60px"/>
   </a>
 
 </form>

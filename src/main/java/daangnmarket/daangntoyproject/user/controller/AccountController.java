@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping(value = "/account")
 public class AccountController {
@@ -21,7 +23,6 @@ public class AccountController {
     }
     @GetMapping(value = "/login")
     public String login(){
-
         return "account/login";
     }
 
