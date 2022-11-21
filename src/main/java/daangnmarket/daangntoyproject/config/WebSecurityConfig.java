@@ -38,7 +38,7 @@ public class WebSecurityConfig  {
         http
                 .csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/account/signup",
+                        .antMatchers("/", "/account/**",
                                 "/css/**", "/images/**",
                                 "/js/**", "/api/**", "/oauth/**").permitAll() // 해당 페이지는 모든 사람들이 접속할 수 있는 권한을 부여한다.
                         .anyRequest().authenticated()   // 만약 그냥 "/"만 해주면 css 적용이 안 됨. 따라서 "/css/**"를 해줌으로써 css폴더 안에 있는 하위 파일들을 다 가져오도록 한다.

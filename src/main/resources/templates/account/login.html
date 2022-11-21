@@ -13,8 +13,12 @@
 </head>
 <body>
 
-    <form class="form-signin" th:action="@{/account/login}" method="post" style="margin-top: 30px;">
-        <a th:href="@{/}"><img class="mb-4 ml-4" src="https://dnvefa72aowie.cloudfront.net/karrot-cs/etc/202007/0cf1d10235c37b2635c02719125da37cc1bd632518198b1e1da7f5a364156540.png" alt="" width="150" height="60"></a>
+    <form class="form-signin" th:action="@{/account/login}" method="post" style="margin-top: 30px; max-width: 400px;">
+        <div class="mb-4 d-flex justify-content-center">
+            <a th:href="@{/}">
+                <img src="https://dnvefa72aowie.cloudfront.net/karrot-cs/etc/202007/0cf1d10235c37b2635c02719125da37cc1bd632518198b1e1da7f5a364156540.png" alt="" width="195" height="60">
+            </a>
+        </div>
         <!--경고창-->
         <div th:if="${param.error}" class="alert alert-danger" role="alert">
             Invalid username and password.
