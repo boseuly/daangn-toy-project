@@ -37,6 +37,13 @@ dependencies {
 	// mysql
 	runtimeOnly 'mysql:mysql-connector-java'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	// mail 관련
+	//spring-boot-starter-mail
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	// mail 서포트
+	implementation 'org.springframework:spring-context-support:5.3.24'
+	//javax.mail
+	implementation 'com.sun.mail:javax.mail:1.6.2'
 }
 
 tasks.named('test') {

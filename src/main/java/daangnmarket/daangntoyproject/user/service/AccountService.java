@@ -61,7 +61,7 @@ public class AccountService {
         }
 
 //        // 로그인 처리
-        Authentication kakaoUsernamePassword = new UsernamePasswordAuthenticationToken(kakaoId, password);  // Collection<? extends GrantedAuthority> authorities 인수를 넣어줘야 인증이 완료 되는데, 안 넣어줘서 그런 듯
+        Authentication kakaoUsernamePassword = new UsernamePasswordAuthenticationToken(kakaoId, password);  // Collection<? extends GrantedAuthority> authorities 인수를 넣어줘야 인증이 완료 되는데, 안 넣어줘서 principal 사용 불가
         System.out.println("kakao 로그인 처리1 : "+kakaoUsernamePassword);
 //        Authentication authentication = authenticationManager.authenticate(kakaoUsernamePassword);
         SecurityContextHolder.getContext().setAuthentication(kakaoUsernamePassword);

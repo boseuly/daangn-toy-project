@@ -15,9 +15,11 @@ public class UserDto {
     private String userId;
     private String userPassword;
     private String nickname;
-    private String email;
+    private String email;       // email 인증
     private String imgUrl;
     private boolean enabled;
+    private String authKey;     // email 인증
+    private int authStatus;     // email 인증
 
 
     public UserDto(String userId, String userPassword, String nickname

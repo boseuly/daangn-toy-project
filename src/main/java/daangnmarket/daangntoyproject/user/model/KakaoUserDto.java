@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 @Getter
-@ToString(exclude = "KakaoUserDto")
+@ToString
 public class KakaoUserDto {
     private long id;
     private String email;
