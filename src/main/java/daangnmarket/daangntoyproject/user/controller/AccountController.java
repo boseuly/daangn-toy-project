@@ -49,22 +49,7 @@ public class AccountController {
     @ResponseBody
     public ResponseEntity<Object> save(@RequestBody(required = true) UserDto userDto) {
 
-//        // 회원가입을 시키기 위해서는 받은 정보를 저장해야 한다.
-//        // DB에 기본정보 insert
-//        EmailAuthService.signUp(userDto);
-//        //임의의 authKey 생성 & 이메일 발송
-//        String authKey = emailAuthService.sendAuthMail(userDto.getEmail());
-//        userDto.setAuthKey(authKey);
-//
-//        Map<String, String> map = new HashMap<String, String>();
-//        map.put("email", userDto.getEmail());
-//        map.put("authKey", userDto.getAuthKey());
-//        System.out.println("저장된 사용자 이메일"+map);
-//
-//        //DB에 authKey 업데이트
-//        EmailAuthService.updateAuthKey(map);
-//
-//        // 중복 확인 + 데이터 저장
+        // 중복 확인 + 데이터 저장
         ResponseEntity<Object> data = accountService.signup(userDto);
         return data;
     }
