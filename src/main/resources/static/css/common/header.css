@@ -30,3 +30,11 @@
 .dropdown-toggle {
     outline: 0;
 }
+
+.btn-color{
+    color: black;
+    border-color: #d1d3d8;
+}
+.btn-color:hover{
+    background-color: #f2f3f6;
+}

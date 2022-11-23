@@ -24,20 +24,20 @@
 </head>
 <body>
 
-<header class="p-3 mb-3" th:fragment="header()">
+<header class="p-3" th:fragment="header()">
     <div class="container d-grid gap-3 align-items-center" style="grid-template-columns: 1fr 2fr;">
         <a href="#" class="d-flex align-items-center col-lg-4 mb-2 mb-lg-0 link-dark text-decoration-none" th:href="@{/}" aria-expanded="false">
             <img src="https://dnvefa72aowie.cloudfront.net/karrot-cs/etc/202007/0cf1d10235c37b2635c02719125da37cc1bd632518198b1e1da7f5a364156540.png"
-                 alt="mdo" width="100" height="30"></img>
+                 alt="mdo" width="105" height="30"></img>
         </a>
         <div class="d-flex justify-content-end">
             <form class="row g-3 row justify-content-end" method="get" th:action="@{/board/list}">
                 <div class="col-auto">
                     <label for="searchText" class="visually-hidden">검색</label>
-                    <input type="text" class="form-control w-60" id="searchText" name="searchText" placeholder="물품이나 동네를 입력하세요" th:value="${param.searchText}">
+                    <input type="text" class="form-control w-60" style="background-color: #f2f3f6; border-color:white" id="searchText" name="searchText" placeholder="물품이나 동네 입력" th:value="${param.searchText}">
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-outline-secondary">검색하기</button>
+                    <button type="submit" class="btn btn-color"><b>검색하기</b></button>
                 </div>
             </form>
             <div class="col-md-2 text-end">
