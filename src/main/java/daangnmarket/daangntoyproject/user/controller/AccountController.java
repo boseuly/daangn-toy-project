@@ -20,9 +20,6 @@ public class AccountController {
     @Autowired
     private EmailAuthService emailAuthService;
 
-//    public AccountController(AccountService accountService){
-//        this.accountService = accountService;
-//    }
     @GetMapping(value = "/login")
     public String login(){
         return "account/login";

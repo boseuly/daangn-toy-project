@@ -51,23 +51,6 @@ public class EmailAuthService implements EmailService{
     //이메일 전송 메소드
     public void mailSend(String setFrom, String toMail, String title, String content)  {
         System.out.println("mailSend 확인 완료");
-//        MimeMessage message = mailSender.createMimeMessage();
-//        MimeMessageHelper helper = null;
-//        try {
-//            helper = new MimeMessageHelper(message, true, "utf-8");
-//        } catch (MessagingException e) {
-//            throw new RuntimeException(e);
-//        }
-//        try {
-//            helper.setFrom(setFrom);
-//            helper.setTo(toMail);
-//            helper.setSubject(title);
-//            helper.setText(content, true);
-//            System.out.println("mailSend 메일 보내기 1초 전");
-//            mailSender.send(message);
-//        } catch (MessagingException e) {
-//            throw new RuntimeException(e);
-//        }
 
         MimeMessage mailMessage = mailSender.createMimeMessage();
         try {

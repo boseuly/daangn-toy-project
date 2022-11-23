@@ -14,6 +14,7 @@ import java.util.List;
 public class User {
     @Id
     @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String userId;
 
     @Column(name = "user_password")
@@ -29,8 +30,8 @@ public class User {
     @Column(name = "manner_temp")
     private double mannerTemp;
 
-    @Column(name = "region_cnt")
-    private int regionCnt;
+    @Column(name = "region_id")
+    private int regionId;
 
     private boolean enabled;
 
@@ -40,6 +41,8 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+
+
     private List<Role> roles = new ArrayList<>();
 
     public User(){}
@@ -65,14 +68,14 @@ public class User {
     @Builder
     public User(String userId, String userPassword,
                 String nickname, String email, String imgUrl, double mannerTemp,
-                int regionCnt){
+                int regionId){
         this.userId = userId;
         this.userPassword = userPassword;
         this.nickname = nickname;
         this.email = email;
         this.imgUrl = imgUrl;
         this.mannerTemp = mannerTemp;
-        this.regionCnt = regionCnt;
+        this.regionId = regionId;
     }
 
 }
