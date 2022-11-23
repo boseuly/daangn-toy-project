@@ -1,5 +1,6 @@
 package daangnmarket.daangntoyproject.user.domain;
 
+import daangnmarket.daangntoyproject.board.domain.Post;
 import daangnmarket.daangntoyproject.user.model.UserDto;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,9 +42,12 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-
-
     private List<Role> roles = new ArrayList<>();
+
+    // 사용자가 작성한 게시글 조회할 때 사용
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Post> posts = new ArrayList<Post>();
+
 
     public User(){}
     public User(UserDto userDto){
@@ -63,8 +67,6 @@ public class User {
         this.enabled = enabled;
     }
 
-
-
     @Builder
     public User(String userId, String userPassword,
                 String nickname, String email, String imgUrl, double mannerTemp,
@@ -76,6 +78,9 @@ public class User {
         this.imgUrl = imgUrl;
         this.mannerTemp = mannerTemp;
         this.regionId = regionId;
+    }
+    public User(String userId){
+        this.userId = userId;
     }
 
 }
