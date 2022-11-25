@@ -1,4 +1,4 @@
-package daangnmarket.daangntoyproject.board.domain;
+package daangnmarket.daangntoyproject.post.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @NoArgsConstructor
+@Table(name = "tb_image")
 public class Image {
     @Id
     @Column(name = "img_id")
@@ -21,12 +22,9 @@ public class Image {
     private Post post;
 
     @Column(name = "img_name")
-    private String imgName;
+    private String imgName;     // 중복 방지를 위해 랜덤값을 넣어준다.
 
     @Column(name = "img_url")
     private String imgUrl;
-
-
-
 
 }

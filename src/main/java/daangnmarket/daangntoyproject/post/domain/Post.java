@@ -1,6 +1,5 @@
-package daangnmarket.daangntoyproject.board.domain;
+package daangnmarket.daangntoyproject.post.domain;
 
-import daangnmarket.daangntoyproject.board.model.PostListDto;
 import daangnmarket.daangntoyproject.user.domain.User;
 import lombok.Getter;
 
@@ -56,7 +55,6 @@ public class Post {
     @OneToMany(mappedBy="post",fetch = FetchType.LAZY)  // 필요할 때만 데이터를 가져올 수 있다.
     private List<Image> images = new ArrayList<Image>();
 
-
     @ManyToOne
     @JoinColumn(name = "seller_id", referencedColumnName = "user_id")
     private User user;
@@ -78,6 +76,11 @@ public class Post {
         this.price = price;
         this.proposalYn = proposalYn;
         this.categoryId = categoryId;
+    }
+
+    // 게시글 리스트 가져올 때 대표이미지 필요
+    public String topImageUrl(){
+        return images.get(0).getImgUrl();
     }
 
 }

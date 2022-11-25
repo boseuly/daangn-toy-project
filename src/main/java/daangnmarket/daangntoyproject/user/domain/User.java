@@ -1,6 +1,6 @@
 package daangnmarket.daangntoyproject.user.domain;
 
-import daangnmarket.daangntoyproject.board.domain.Post;
+import daangnmarket.daangntoyproject.post.domain.Post;
 import daangnmarket.daangntoyproject.user.model.UserDto;
 import lombok.Builder;
 import lombok.Getter;

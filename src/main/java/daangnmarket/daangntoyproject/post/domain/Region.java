@@ -1,4 +1,4 @@
-package daangnmarket.daangntoyproject.board.domain;
+package daangnmarket.daangntoyproject.post.domain;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -6,12 +6,15 @@ import lombok.ToString;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Getter
 @ToString
+@Table(name = "tb_region")
 public class Region {
     @Id
+    @Column(name = "region_id")
     private int regionId;
 
     @Column(name = "address_name")
