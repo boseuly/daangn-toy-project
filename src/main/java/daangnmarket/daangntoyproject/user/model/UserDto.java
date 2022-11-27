@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.Optional;
+
 
 @Getter
 @Setter
@@ -43,9 +45,10 @@ public class UserDto {
     }
 
     //entity -> dto(db를 조회할 때 사용)
-    public UserDto(User entity){
-        this.userId = entity.getUserId();
-        this.userPassword = entity.getUserPassword();
+    public UserDto(Optional<User> entity){
+        this.userId = entity.get().getUserId();
+        this.userPassword = entity.get().getUserPassword();
+        this.imgUrl = entity.get().getImgUrl();
     }
 
 
