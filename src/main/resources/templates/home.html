@@ -3,7 +3,10 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:insert="~{fragments/common :: head('당근마켓')}">
+<head>
+    <div th:replace="fragments/common::head('당근마켓 구현하기')"></div>
+    <!-- home -->
+    <link href="home.css" th:href="@{/css/home/home.css}" rel="stylesheet">
 </head>
 <body>
     <header th:replace="fragments/common ::header()"></header>
