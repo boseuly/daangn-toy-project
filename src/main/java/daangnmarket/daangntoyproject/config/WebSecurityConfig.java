@@ -59,8 +59,6 @@ public class WebSecurityConfig  {
     }
 
 
-
-//
     // jdbc authentication 방식 (db로 인증하는 방법)
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) // autowired를 통해서 autenticationManagerBuilder를 생성한다.

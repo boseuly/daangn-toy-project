@@ -19,6 +19,7 @@ public class UserDto {
     private String nickname;
     private String email;       // email 인증
     private String imgUrl;
+    private double mannerTemp;
     private boolean enabled;
     private String authKey;     // email 인증
     private int authStatus;     // email 인증
@@ -48,6 +49,9 @@ public class UserDto {
     public UserDto(Optional<User> entity){
         this.userId = entity.get().getUserId();
         this.userPassword = entity.get().getUserPassword();
+        this.email = entity.get().getEmail();
+        this.mannerTemp = entity.get().getMannerTemp();
+        this.nickname = entity.get().getNickname();
         this.imgUrl = entity.get().getImgUrl();
     }
 

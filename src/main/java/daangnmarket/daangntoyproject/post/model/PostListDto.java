@@ -22,7 +22,7 @@ public class PostListDto {
     private int likeCnt;
     private int viewCnt;
 
-    private String imgUrl;  // 이건 post객체와 img객체를 연결해서 가져오기 // map을 통해서 이미지명, 이미지 url로 가져오기
+    private String imgUrl;
 
     public PostListDto(){}
     // Entity를 Dto로 변환해줘야 한다.
@@ -33,6 +33,7 @@ public class PostListDto {
         this.price = String.format("%,d", post.getPrice());
         this.likeCnt = post.getLikeCnt();
         this.viewCnt = post.getViewCnt();
+        this.imgUrl = post.topImageUrl();
     }
 //    public PostListDto(List<Image> images){
 //        int idx = 0;
