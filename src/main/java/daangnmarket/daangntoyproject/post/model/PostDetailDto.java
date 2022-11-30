@@ -38,7 +38,11 @@ public class PostDetailDto {
 
     private String categoryName;
 
-    private String region;  // 어느 동인지만 알아도 됨
+    private int categoryId; // 필요
+
+    private String region;
+
+    private int regionId;   // 필요
 
     private int viewCnt;
 
