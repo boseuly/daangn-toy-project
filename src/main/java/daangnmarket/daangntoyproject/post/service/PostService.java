@@ -1,13 +1,11 @@
 package daangnmarket.daangntoyproject.post.service;
 
 import daangnmarket.daangntoyproject.post.domain.Post;
-import daangnmarket.daangntoyproject.post.domain.Region;
 import daangnmarket.daangntoyproject.post.model.PostDetailDto;
 import daangnmarket.daangntoyproject.post.model.PostListDto;
-import daangnmarket.daangntoyproject.post.model.View;
+import daangnmarket.daangntoyproject.post.domain.View;
 import daangnmarket.daangntoyproject.post.repository.PostRepository;
 import daangnmarket.daangntoyproject.post.repository.ViewRepository;
-import daangnmarket.daangntoyproject.user.model.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,17 +42,17 @@ public class PostService {
     @Transactional
     public PostDetailDto getPost(int pId, String userId) {
         Optional<Post> postEntity = postRepository.findById(pId);
-        PostDetailDto postDto = new PostDetailDto(postEntity);
+        PostDetailDto detailDto = new PostDetailDto(postEntity);
 
         System.out.println("userId = " + userId);
         // 방문 확인
         int visit = _check_visit(pId, userId);
         if(visit == 0){ // 방문 x
-            postDto.setViewCnt(postDto.getViewCnt() + 1);
+            detailDto.setViewCnt(detailDto.getViewCnt() + 1);
             postEntity.get().setViewCnt(postEntity.get().getViewCnt() + 1);
             postRepository.save(postEntity.get());
         }
-        return postDto;
+        return detailDto;
     }
 
     private int _check_visit(int pId, String userId){

@@ -43,7 +43,7 @@
                     <img th:if="${session.login != null}" th:src="@{${session.login.imgUrl}}" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                    <li><a class="dropdown-item" th:href="@{/post/}">글쓰기</a></li>
+                    <li><a class="dropdown-item" th:href="@{/post/form}">글쓰기</a></li>
                     <li><a class="dropdown-item" href="#">나의 당근</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><form  class="form-inline my-2 my-lg-0" sec:authorize="isAuthenticated()" method="post"  th:action="@{/logout}">

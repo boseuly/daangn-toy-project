@@ -1,4 +1,4 @@
-package daangnmarket.daangntoyproject.post.model;
+package daangnmarket.daangntoyproject.post.domain;
 
 import lombok.Getter;
 
