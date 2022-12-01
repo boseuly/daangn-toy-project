@@ -7,23 +7,26 @@ const handleResize = () => {
 const save = () =>{
 
     const postTitle = $('#postTitle')[0].value;
-    const price = $('#price')[0].value;
+    var price = $('#price')[0].value;
     const postContent = $('#postContent')[0].value;
-    const sellerId = $('#userId')[0].value;
+    const userId = $('#userId')[0].value;
     const regionId = $('#regionId')[0].value;
     const categoryId = $('#categoryId')[0].value;
 
     const free = $('#free')[0].checked === true ? 'Y' : 'N';
     const proposalYn = $('#proposalYn')[0].checked === true ? 'Y' : 'N';
 
+    if(free === 'Y'){   // 만약 나눔이면 price는 0원
+        price = 0;
+    }
+
     const data = {
         "postTitle" : postTitle,
         "postContent" : postContent,
         "price" : price,
-        "sellerId" : sellerId,
+        "userId" : userId,  // 어떻게 저장될지 모르겠음
         "regionId" : regionId,
         "categoryId" : categoryId,
-        "free" : free,
         "proposalYn" : proposalYn,
     }
 
@@ -38,10 +41,11 @@ const save = () =>{
     }
 
     // key 라는 이름으로 위에서 담은 data를 formData에 append한다.
-    formData.append('detailDto', new Blob([JSON.stringify(data)], {type : "application/json"}));
+    formData.append('saveDto', new Blob([JSON.stringify(data)], {type : "application/json"}));
 
     $.ajax({
         url : '/post',
+        type : 'post',
         data : formData,
         contentType : false,                // 중요
         processData : false,                // 중요

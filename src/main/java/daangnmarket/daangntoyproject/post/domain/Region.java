@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 @Entity
 @Getter
-@ToString
 @Table(name = "tb_region")
 public class Region {
     @Id
@@ -32,6 +31,9 @@ public class Region {
     @Column(name = "region_longitude")
     private double longitude;
 
-
+    public Region(int regionId) {
+        this.regionId = regionId;
+    }
+    public Region() {}
 
 }

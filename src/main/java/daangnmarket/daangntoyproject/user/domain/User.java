@@ -44,8 +44,8 @@ public class User {
     private List<Role> roles = new ArrayList<>();
 
     // 사용자가 작성한 게시글 조회할 때 사용
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Post> posts = new ArrayList<Post>();
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
+//    private List<Post> posts = new ArrayList<Post>();
 
 
     public User(){}
@@ -78,8 +78,6 @@ public class User {
         this.mannerTemp = mannerTemp;
         this.regionId = regionId;
     }
-    public User(String userId){
-        this.userId = userId;
-    }
+
 
 }
