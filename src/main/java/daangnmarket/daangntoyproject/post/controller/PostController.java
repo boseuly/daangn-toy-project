@@ -2,10 +2,7 @@ package daangnmarket.daangntoyproject.post.controller;
 
 import daangnmarket.daangntoyproject.post.domain.Category;
 import daangnmarket.daangntoyproject.post.domain.Region;
-import daangnmarket.daangntoyproject.post.model.CategoryDto;
-import daangnmarket.daangntoyproject.post.model.PostDetailDto;
-import daangnmarket.daangntoyproject.post.model.PostListDto;
-import daangnmarket.daangntoyproject.post.model.RegionDto;
+import daangnmarket.daangntoyproject.post.model.*;
 import daangnmarket.daangntoyproject.post.repository.CategoryRepository;
 import daangnmarket.daangntoyproject.post.repository.PostRepository;
 import daangnmarket.daangntoyproject.post.repository.RegionRepository;
@@ -23,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +28,7 @@ import java.util.Map;
 
 
 @Controller
+@MultipartConfig
 public class PostController {
 
     @Autowired
@@ -66,19 +65,19 @@ public class PostController {
 
     @GetMapping(value = "/post/form")
     public String form(Model model,
-                    @RequestParam(required=false)String pId){
+                    @RequestParam(required=false)String postId){
         List<CategoryDto> categories = new CategoryDto().changeDto(categoryRepository.findAll());
         List<RegionDto> regions = new RegionDto().changeDto(regionRepository.findAll());
         model.addAttribute("categories",categories);
         model.addAttribute("regions",regions);
 
-        if(pId == null){
+        if(postId == null){
             // 글쓰기
-            model.addAttribute("post", new PostDetailDto());    // 새로운 객체를 생성해서 전달
+            model.addAttribute("post", new PostSaveDto());    // 새로운 객체를 생성해서 전달
         }else {
             // 수정
-            PostDetailDto detailDto = new PostDetailDto(postRepository.findById(Integer.parseInt(pId)));
-            model.addAttribute("post", detailDto);
+            PostSaveDto saveDto = new PostSaveDto(postRepository.findById(Integer.parseInt(postId)));
+            model.addAttribute("post", saveDto);
         }
 
         return "/post/post-form";
@@ -86,17 +85,12 @@ public class PostController {
 
     @PostMapping(value = "/post")
     @ResponseBody
-    public ResponseEntity<Object> add(@RequestPart(value = "detailDto") PostDetailDto detailDto,
-                                      @RequestPart(value = "file") List<MultipartFile> files){
-        System.out.println("controller - add 메소드 detailDto = "+detailDto);
+    public ResponseEntity<Object> add(@RequestPart(value = "saveDto") PostSaveDto saveDto,
+                                      @RequestPart(value = "image") List<MultipartFile> files){
+        System.out.println("controller - add 메소드 saveDto = "+saveDto);
         System.out.println("controller - files = " + files);
-        if(detailDto.getPostId() == 0){     // 게시글 작성
 
-        }else {                            // 게시글 수정
-
-        }
-
-        // 이미지가 존재하는지 확인하기
+        postService.save(saveDto, files);
 
         return null;
     }

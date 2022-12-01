@@ -20,4 +20,7 @@ public class Category {
 
 
     public Category(){}
+    public Category(int categoryId){
+        this.categoryId = categoryId;
+    }
 }

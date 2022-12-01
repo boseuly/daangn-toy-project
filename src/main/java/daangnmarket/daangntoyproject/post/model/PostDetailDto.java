@@ -38,11 +38,8 @@ public class PostDetailDto {
 
     private String categoryName;
 
-    private int categoryId; // 필요
 
     private String region;
-
-    private int regionId;   // 필요
 
     private int viewCnt;
 
@@ -66,7 +63,7 @@ public class PostDetailDto {
         this.region = postEntity.get().getRegion().getSecDepth() + " " +postEntity.get().getRegion().getThirdDepth();
         this.viewCnt = postEntity.get().getViewCnt();
         this.likeCnt = postEntity.get().getLikeCnt();
-        this.userDto = new UserDto(Optional.ofNullable(postEntity.get().getUser()));
+        this.userDto.setUserId(postEntity.get().getUserId());
         int idx = 0;
         for(Image image:postEntity.get().getImages()){
             imgUrl.add(idx, image.getImgUrl());
