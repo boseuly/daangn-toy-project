@@ -46,7 +46,6 @@ public class PostService {
         }
         // 이미지 가져오기
         return postDtos;
-
     }
 
     @Transactional
