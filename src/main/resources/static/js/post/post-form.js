@@ -50,8 +50,8 @@ const save = () =>{
         contentType : false,                // 중요
         processData : false,                // 중요
         enctype : 'multipart/form-data',    // 중요
-        success : function (data, message) {
-
+        success : function (data) {
+            location.href="/post?pId=" + data.postId;
         }
 
     })

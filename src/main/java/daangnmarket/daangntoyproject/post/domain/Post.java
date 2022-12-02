@@ -61,13 +61,7 @@ public class Post {
     @Column(name = "like_cnt")
     private int likeCnt;
 
-    @OneToMany(mappedBy="post",fetch = FetchType.LAZY)  // 필요할 때만 데이터를 가져올 수 있다.
-    private List<Image> images = new ArrayList<Image>();
 
-
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-//    @JoinColumn(name = "seller_id", referencedColumnName = "user_id")
-//    private User user;
 
     // 원래 Entity에는 Setter만들면 안 되는데 불가피했음 -> 데이터 저장할 때 사용
     public void setRegion(int regionId){
@@ -103,20 +97,6 @@ public class Post {
         this.setRegion(regionId);
         this.setCategory(categoryId);
 
-    }
-
-
-    // 데이터 DB에 추가 시 사용
-//    public Post(String postTitle, String postContent, int price, String proposalYn) {
-//        this.postTitle = postTitle;
-//        this.postContent = postContent;
-//        this.price = price;
-//        this.proposalYn = proposalYn;
-//    }
-
-    // 게시글 리스트 가져올 때 대표이미지 필요
-    public String topImageUrl(){
-        return images.get(0).getImgUrl();
     }
 
 }

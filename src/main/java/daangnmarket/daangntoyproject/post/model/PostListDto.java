@@ -5,9 +5,7 @@ import daangnmarket.daangntoyproject.post.domain.Post;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Getter
 @Setter
@@ -33,13 +31,7 @@ public class PostListDto {
         this.price = String.format("%,d", post.getPrice());
         this.likeCnt = post.getLikeCnt();
         this.viewCnt = post.getViewCnt();
-        this.imgUrl = post.topImageUrl();
     }
-//    public PostListDto(List<Image> images){
-//        int idx = 0;
-//        this.imgUrl = String.valueOf(images.get(0));
-//        System.out.println("이미지 url : " + this.imgUrl);
-//    }
 
     public PostListDto(int postId, String postTitle, String region, String price, int likeCnt, int viewCnt, List<Image> images) {
         this.postId = postId;
