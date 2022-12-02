@@ -10,7 +10,9 @@ import daangnmarket.daangntoyproject.post.service.PostService;
 import daangnmarket.daangntoyproject.user.controller.AccountController;
 import daangnmarket.daangntoyproject.user.model.UserDto;
 import lombok.Getter;
+import lombok.Value;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -21,7 +23,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +35,6 @@ import java.util.Map;
 @Controller
 @MultipartConfig
 public class PostController {
-
     @Autowired
     private PostService postService;
     @Autowired
@@ -52,9 +56,10 @@ public class PostController {
 
     @GetMapping(value = "/post")
     public String detail(@RequestParam(required = false) int pId,
-                        Model model, HttpSession session){
+                        Model model, HttpSession session){          // session : 조회때문에 필요
         UserDto login = (UserDto) session.getAttribute("login");
         PostDetailDto post = postService.getPost(pId, login.getUserId());
+        System.out.println("controller login = " + login.getUserId());
         List<PostListDto> posts = postService.getPopularPosts(post.getRegion());    // 인기글 가져오기
         System.out.println("이미지 url 가져오기 : post image url = " + post.getImgUrl());
 
@@ -86,13 +91,9 @@ public class PostController {
     @PostMapping(value = "/post")
     @ResponseBody
     public ResponseEntity<Object> add(@RequestPart(value = "saveDto") PostSaveDto saveDto,
-                                      @RequestPart(value = "image") List<MultipartFile> files){
-        System.out.println("controller - add 메소드 saveDto = "+saveDto);
-        System.out.println("controller - files = " + files);
-
-        postService.save(saveDto, files);
-
-        return null;
+                                      @RequestPart(value = "image") List<MultipartFile> files,
+                                      HttpServletRequest request) throws IOException {
+        return postService.save(saveDto, files, request);
     }
 
 

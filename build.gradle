@@ -44,6 +44,10 @@ dependencies {
 	implementation 'org.springframework:spring-context-support:5.3.24'
 	//javax.mail
 	implementation 'com.sun.mail:javax.mail:1.6.2'
+	// 이미지 업로드
+	implementation 'commons-io:commons-io:2.11.0'
+
+
 }
 
 tasks.named('test') {

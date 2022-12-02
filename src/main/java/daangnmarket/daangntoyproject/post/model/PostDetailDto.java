@@ -46,10 +46,32 @@ public class PostDetailDto {
     private int likeCnt;
 
     private UserDto userDto;
+    private String userId;
 
     private List<String> imgUrl = new ArrayList<String>();
 
+    public void setImgUrl(List<Image> images){
+        int idx = 0;
+        for (Image image : images){
+            imgUrl.add(idx, image.getImgUrl());
+        }
+    }
     public PostDetailDto(){}
+    public PostDetailDto(Post postEntity){
+        this.postId = postEntity.getPostId();
+        this.postTitle = postEntity.getPostTitle();
+        this.postContent = postEntity.getPostContent();
+        this.createdAt = postEntity.getCreatedAt();
+        this.updatedAt = postEntity.getUpdatedAt();
+        this.status = postEntity.getStatus();
+        this.price = String.format("%,d", postEntity.getPrice());
+        this.proposalYn = postEntity.getProposalYn();
+        this.categoryName = postEntity.getCategory().getCategoryName();
+        this.region = postEntity.getRegion().getSecDepth() + " " +postEntity.getRegion().getThirdDepth();
+        this.viewCnt = postEntity.getViewCnt();
+        this.likeCnt = postEntity.getLikeCnt();
+        this.userId = postEntity.getUserId();
+    }
     public PostDetailDto(Optional<Post> postEntity){
         this.postId = postEntity.get().getPostId();
         this.postTitle = postEntity.get().getPostTitle();
@@ -63,11 +85,7 @@ public class PostDetailDto {
         this.region = postEntity.get().getRegion().getSecDepth() + " " +postEntity.get().getRegion().getThirdDepth();
         this.viewCnt = postEntity.get().getViewCnt();
         this.likeCnt = postEntity.get().getLikeCnt();
-        this.userDto.setUserId(postEntity.get().getUserId());
-        int idx = 0;
-        for(Image image:postEntity.get().getImages()){
-            imgUrl.add(idx, image.getImgUrl());
-        }
+        this.userId = postEntity.get().getUserId();
     }
 
     //dto -> entity (db에 등록할 때 사용)
