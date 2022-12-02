@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Getter
@@ -21,9 +22,9 @@ public class PostSaveDto {
 
     private String postContent;
 
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     private String status;  // O : 진행중 , R : 예약중, C : 거래완료
 
@@ -48,8 +49,7 @@ public class PostSaveDto {
                 .postContent(postContent)
                 .price(Integer.parseInt(price.replaceAll(",", "")))
                 .proposalYn(proposalYn)
-                .createdAt(LocalDate.now())
-                .updatedAt(updatedAt)
+                .createdAt(LocalDateTime.now())
                 .status("O")
                 .deletedYn("N")
                 .regionId(regionId)

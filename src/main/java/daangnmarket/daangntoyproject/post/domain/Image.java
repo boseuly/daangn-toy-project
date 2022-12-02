@@ -36,4 +36,5 @@ public class Image {
         this.imgName = imgName;
         this.imgUrl = imgUrl;
     }
+
 }

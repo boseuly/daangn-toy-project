@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Component
 public class FileUtils {
-    public static List<ImageDto> imageUpload(List<MultipartFile> images, int postId, HttpServletRequest request) throws IOException {
+    public static List<ImageDto> imageUpload(List<MultipartFile> images, int postId) throws IOException {
         List<ImageDto> imageDtos = new ArrayList<ImageDto>();
         ImageDto imageDto = null;
         String imgName = null;
