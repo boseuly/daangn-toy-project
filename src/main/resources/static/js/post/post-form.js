@@ -5,6 +5,8 @@ const handleResize = () => {
 }
 
 const save = () =>{
+    const postId = $('#postId')[0].value;
+    console.log("save - postId 확인 = " + postId);
 
     const postTitle = $('#postTitle')[0].value;
     var price = $('#price')[0].value;
@@ -21,6 +23,7 @@ const save = () =>{
     }
 
     const data = {
+        "postId" : postId,
         "postTitle" : postTitle,
         "postContent" : postContent,
         "price" : price,
@@ -42,18 +45,34 @@ const save = () =>{
 
     // key 라는 이름으로 위에서 담은 data를 formData에 append한다.
     formData.append('saveDto', new Blob([JSON.stringify(data)], {type : "application/json"}));
+    if(postId == 0){
+        $.ajax({
+            url : '/post',
+            type : 'post',
+            data : formData,
+            contentType : false,                // 중요
+            processData : false,                // 중요
+            enctype : 'multipart/form-data',    // 중요
+            success : function (data) {
+                location.href="/post?pId=" + data.postId;
+            }
 
-    $.ajax({
-        url : '/post',
-        type : 'post',
-        data : formData,
-        contentType : false,                // 중요
-        processData : false,                // 중요
-        enctype : 'multipart/form-data',    // 중요
-        success : function (data) {
-            location.href="/post?pId=" + data.postId;
-        }
+        })
+    }else{
+        $.ajax({
+            url : '/post',
+            type : 'put',
+            data : formData,
+            contentType : false,                // 중요
+            processData : false,                // 중요
+            enctype : 'multipart/form-data',    // 중요
+            success : function (data) {
+                location.href="/post?pId=" + data.postId;
+            }
 
-    })
+        })
+
+    }
+
 }
 

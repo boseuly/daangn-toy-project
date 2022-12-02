@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,9 +27,9 @@ public class PostDetailDto {
 
     private String postContent;
 
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
-    private Date updatedAt;
+    private LocalDateTime updatedAt;
 
     private String status;  // O : 진행중 , R : 예약중, C : 거래완료
 

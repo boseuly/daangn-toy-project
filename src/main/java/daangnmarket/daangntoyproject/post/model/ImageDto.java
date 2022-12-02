@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
@@ -22,6 +24,13 @@ public class ImageDto {
                 .imgName(imgName)
                 .imgUrl(imgUrl)
                 .build();
+    }
+
+    public ImageDto(Image image){
+        this.imgId = image.getImgId();
+        this.imgUrl = image.getImgUrl();
+        this.imgName = image.getImgName();
+        this.postId = image.getPostId();
     }
 
 }
