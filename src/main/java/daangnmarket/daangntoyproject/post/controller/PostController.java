@@ -110,6 +110,12 @@ public class PostController {
         return postService.modify(saveDto, files);
     }
 
+    @DeleteMapping(value = "/post")
+    @ResponseBody
+    public ResponseEntity<Object> delete(@RequestParam(value = "pId")int pId){
+        return postService.deletePost(pId);
+    }
+
     @DeleteMapping(value = "/post/image")
     @ResponseBody
     public ResponseEntity<Object> imageRemove(@RequestParam(value = "imgId")int imgId){

@@ -166,4 +166,20 @@ public class PostService {
         }
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
+
+    // 게시글 삭제
+    @Transactional
+    public ResponseEntity<Object> deletePost(int pId) {
+        // 해당 글이 있는지 확인
+        Post postEntity = postRepository.findById(pId).orElse(null);
+        Map<String, String> message = new HashMap<String, String>();
+        if(postEntity != null){
+            imageRepository.deleteByPostId(pId);        // 이미지를 먼저 삭제해야 함(제약조건)
+            postRepository.deleteById(pId);
+            message.put("message", "success");
+        }else {
+            message.put("message", "error");
+        }
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
 }
