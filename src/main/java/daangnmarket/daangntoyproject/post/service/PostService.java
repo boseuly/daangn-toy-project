@@ -10,6 +10,7 @@ import daangnmarket.daangntoyproject.post.model.PostSaveDto;
 import daangnmarket.daangntoyproject.post.repository.ImageRepository;
 import daangnmarket.daangntoyproject.post.repository.PostRepository;
 import daangnmarket.daangntoyproject.post.repository.ViewRepository;
+import daangnmarket.daangntoyproject.user.domain.User;
 import daangnmarket.daangntoyproject.user.model.UserDto;
 import daangnmarket.daangntoyproject.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
