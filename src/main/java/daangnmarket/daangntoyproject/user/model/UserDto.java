@@ -46,13 +46,13 @@ public class UserDto {
     }
 
     //entity -> dto(db를 조회할 때 사용)
-    public UserDto(Optional<User> entity){
-        this.userId = entity.get().getUserId();
-        this.userPassword = entity.get().getUserPassword();
-        this.email = entity.get().getEmail();
-        this.mannerTemp = entity.get().getMannerTemp();
-        this.nickname = entity.get().getNickname();
-        this.imgUrl = entity.get().getImgUrl();
+    public UserDto(User entity){
+        this.userId = entity.getUserId();
+        this.userPassword = entity.getUserPassword();
+        this.email = entity.getEmail();
+        this.mannerTemp = entity.getMannerTemp();
+        this.nickname = entity.getNickname();
+        this.imgUrl = entity.getImgUrl();
     }
 
 

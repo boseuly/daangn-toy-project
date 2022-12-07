@@ -1,0 +1,86 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/common::head('당근당근 채팅')"></div>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 반응형 웹 -->
+    <link rel="stylesheet" th:href="@{/css/chat/chat.css}">
+</head>
+<body>
+    <div th:replace="fragments/common::header()"></div>
+    <main class="content" style="margin-top: 30px;">
+        <div class="container p-0">
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col-12 col-lg-5 col-xl-3 border-right" style="border-right: 1px solid lightgray;">
+
+                        <div class="px-4 d-none d-md-block">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <input type="text" class="form-control my-3" placeholder="검색">
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#" class="list-group-item list-group-item-action border-0" th:each="chatRoom : ${chatRooms}">
+                            <div class="badge bg-success float-right" th:each="chatUser : ${chatUsers}">5</div>
+                            <div class="d-flex align-items-start">
+                                <img th:if="${(chatUser.userId != chatRoom.buyerId && chatUser.userId != chatRoom.sellerId) && (chatUser.userId == chatRoom.sellerId || chatUser.userId == chatRoom.buyerId)}" th:src="@{${chatUser.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
+                                <div class="flex-grow-1 ml-3" th:if="${}" th:text="${chatUser.nickname}">
+                                </div>
+                            </div>
+                        </a>
+
+                        <hr class="d-block d-lg-none mt-1 mb-0">
+                    </div>
+                    <div class="col-12 col-lg-7 col-xl-9">
+                        <div class="py-2 px-4 border-bottom d-none d-lg-block">
+                            <div class="d-flex align-items-center py-1">
+                                <div class="position-relative">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                </div>
+                                <div class="flex-grow-1 pl-3" style="margin-left: 10px;">
+                                    <strong>상대방</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="position-relative">
+                            <div class="chat-messages p-4">
+
+                                <div class="chat-message-right pb-4">
+                                    <div>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                        <div class="text-muted small text-nowrap mt-2">2:33 am</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
+                                        지금 바로 거래 가능 한가요?
+                                    </div>
+                                </div>
+
+                                <div class="chat-message-left pb-4">
+                                    <div>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                        <div class="text-muted small text-nowrap mt-2">오후 4:30</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                        네 가능 합니다.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex-grow-0 py-3 px-4 border-top">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="메시지 입력하기">
+                                <button class="btn">전송</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

@@ -18,9 +18,9 @@ import java.time.LocalDate;
 @Table(name = "tb_chat_room")
 public class ChatRoom {
     @Id
-    @Column(name = "chat_id")
+    @Column(name = "room_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int chatId;
+    private int roomId;
 
     @NotNull
     @Column(name = "seller_id")
@@ -28,7 +28,7 @@ public class ChatRoom {
 
     @NotNull
     @Column(name = "buyer_id")
-    private String buyer_id;
+    private String buyerId;
 
     @NotNull
     @Column(name = "post_id")
@@ -43,16 +43,20 @@ public class ChatRoom {
     @Column(name = "create_date")
     private LocalDate createDate;
 
-    @Builder
-    public ChatRoom(int chatId, String sellerId, String buyer_id, int postId
-            , String sellerDeleteYn, String buyerDeleteYn, LocalDate createDate) {
-        this.chatId = chatId;
+    public ChatRoom(String sellerId, String buyerId, int postId) {
         this.sellerId = sellerId;
-        this.buyer_id = buyer_id;
+        this.buyerId = buyerId;
+        this.postId = postId;
+    }
+
+    // 수정 시 필요
+    @Builder
+    public ChatRoom(String sellerId, String buyerId, int postId, String sellerDeleteYn, String buyerDeleteYn) {
+        this.sellerId = sellerId;
+        this.buyerId = buyerId;
         this.postId = postId;
         this.sellerDeleteYn = sellerDeleteYn;
         this.buyerDeleteYn = buyerDeleteYn;
-        this.createDate = createDate;
     }
 
 }

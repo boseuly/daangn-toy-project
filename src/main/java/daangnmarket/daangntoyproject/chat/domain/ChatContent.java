@@ -24,8 +24,11 @@ public class ChatContent {
     @Column(name = "room_id")
     private int roomId;
 
-    @Column(name = "user_id")
-    private int userId;
+    @Column(name = "seller_id")
+    private String sellerId;
+
+    @Column(name = "buyer_id")
+    private String buyerId;
 
     @Column(name = "chat_content")
     private String chatContent;
@@ -40,14 +43,13 @@ public class ChatContent {
     private String deleteYn;
 
     @Builder
-    public ChatContent(int chatId, int roomId, int userId, String chatContent
-            , LocalDateTime createDate, String checkYn, String deleteYn) {
-        this.chatId = chatId;
+    public ChatContent(int roomId, String sellerId, String buyerId, String chatContent
+            , LocalDateTime createDate, String checkYn) {
         this.roomId = roomId;
-        this.userId = userId;
+        this.sellerId = sellerId;
+        this.buyerId = buyerId;
         this.chatContent = chatContent;
         this.createDate = createDate;
         this.checkYn = checkYn;
-        this.deleteYn = deleteYn;
     }
 }

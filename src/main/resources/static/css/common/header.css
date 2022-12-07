@@ -38,3 +38,11 @@
 .btn-color:hover{
     background-color: #f2f3f6;
 }
+
+.posts-btn {
+    position: absolute;
+    margin-left: 8%;
+    font-size: large;
+    font-weight: bold;
+    color: #ff6f0f;
+}

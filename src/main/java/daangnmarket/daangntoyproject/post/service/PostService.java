@@ -38,10 +38,15 @@ public class PostService {
     @Autowired
     private FileUtils fileUtils;
 
-    public List<PostListDto> getPosts(String searchText){
+    public List<PostListDto> getPosts(String searchText, String loginId){
 
         // 객체를 가져와야 함.
-        List<Post> posts = postRepository.findByPostTitleContaining(searchText);
+        List<Post> posts = null;
+        if(loginId != null){
+            posts = postRepository.findByPostTitleContainingAndUserIdContaining(searchText, loginId);
+        }else {
+            posts = postRepository.findByPostTitleContaining(searchText);
+        }
         List<PostListDto> postDtos = new ArrayList<PostListDto>();
         int idx = 0;
         for(Post post:posts){
@@ -59,7 +64,7 @@ public class PostService {
         Post postEntity = postRepository.findById(pId).orElse(null);
         System.out.println("postEntity 확인 = " + postEntity);
         PostDetailDto detailDto = new PostDetailDto(postEntity);    // userDto 저장 안되고 userId만 저장됨
-        detailDto.setUserDto(new UserDto(userRepository.findById(detailDto.getUserId()))); // Post에는 userDto가 없기 때문에 따로 user 상세정보를 찾아서 넣어준다.
+        detailDto.setUserDto(new UserDto(userRepository.findById(detailDto.getUserId()).orElse(null))); // Post에는 userDto가 없기 때문에 따로 user 상세정보를 찾아서 넣어준다.
         detailDto.setImgUrl(imageRepository.findByPostId(pId));     // 이미지 저장
 
         // 방문 확인

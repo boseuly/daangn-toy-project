@@ -1,23 +1,14 @@
 package daangnmarket.daangntoyproject.post.controller;
 
-import daangnmarket.daangntoyproject.post.domain.Category;
-import daangnmarket.daangntoyproject.post.domain.Image;
-import daangnmarket.daangntoyproject.post.domain.Region;
 import daangnmarket.daangntoyproject.post.model.*;
 import daangnmarket.daangntoyproject.post.repository.CategoryRepository;
-import daangnmarket.daangntoyproject.post.repository.ImageRepository;
 import daangnmarket.daangntoyproject.post.repository.PostRepository;
 import daangnmarket.daangntoyproject.post.repository.RegionRepository;
 import daangnmarket.daangntoyproject.post.service.PostService;
-import daangnmarket.daangntoyproject.user.controller.AccountController;
 import daangnmarket.daangntoyproject.user.model.UserDto;
-import lombok.Getter;
-import lombok.Value;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,18 +16,16 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 
 @Controller
 @MultipartConfig
 public class PostController {
+    private static final Logger logger = LoggerFactory.getLogger(PostController.class);
+
     @Autowired
     private PostService postService;
     @Autowired
@@ -47,10 +36,12 @@ public class PostController {
     private RegionRepository regionRepository;
 
     @GetMapping(value = "/posts")
-    public String getPosts(@RequestParam(required = false) String searchText,
-                          Model model){
+    public String getPosts(@RequestParam(value = "searchText",required = false) String searchText,
+                          @RequestParam(value = "userId",required = false) String userId,
+                           Model model){
 
-        List<PostListDto> posts = postService.getPosts(searchText);
+        logger.info("postController(searchText = {}, userId = {})", searchText, userId);
+        List<PostListDto> posts = postService.getPosts(searchText, userId);
         model.addAttribute("posts", posts);
 
         return "/post/post-list";

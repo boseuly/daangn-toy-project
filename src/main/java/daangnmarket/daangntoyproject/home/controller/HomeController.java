@@ -24,7 +24,7 @@ public class HomeController {
     public String home(Principal principal, HttpSession session){
         UserDto login = null;
         if(principal != null){
-            login = new UserDto(userRepository.findById(principal.getName()));
+            login = new UserDto(userRepository.findById(principal.getName()).orElse(null));
         }
         session.setAttribute("login", login);
         return "/home";

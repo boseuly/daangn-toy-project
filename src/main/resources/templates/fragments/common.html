@@ -27,6 +27,7 @@
             <img src="https://dnvefa72aowie.cloudfront.net/karrot-cs/etc/202007/0cf1d10235c37b2635c02719125da37cc1bd632518198b1e1da7f5a364156540.png"
                  alt="mdo" width="105" height="30"></img>
         </a>
+        <a class="nav-link active link-dark text-decoration-none posts-btn" th:href="@{/posts}">중고거래</a>
         <div class="d-flex justify-content-end">
             <form class="row g-3 row justify-content-end" method="get" th:action="@{/posts}">
                 <div class="col-auto">
@@ -44,7 +45,8 @@
                 </a>
                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
                     <li><a class="dropdown-item" th:href="@{/post/form}">글쓰기</a></li>
-                    <li><a class="dropdown-item" href="#">나의 당근</a></li>
+                    <li><a class="dropdown-item" th:href="@{/posts(userId=${session.login.userId})}">나의 당근</a></li>
+                    <li><a class="dropdown-item" href="#">나의 페이지</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><form  class="form-inline my-2 my-lg-0" sec:authorize="isAuthenticated()" method="post"  th:action="@{/logout}">
                         <button class="btn btn-sm" type="submit" style="margin-left: 5px;">Logout</button>
@@ -54,7 +56,7 @@
             </div>
 
             <div class="col-md-2 text-end" sec:authorize="isAnonymous()">
-                <a type="button" class="btn btn-outline-white me-2" sec:authorize="isAnonymous()"  th:href="@{/account/login}">Login</a>  <!-- isAnonymous() : 로그인 하지 않은 경우 보인다. -->
+                <a type="button" class="btn me-2" sec:authorize="isAnonymous()" style="border-color: #d1d3d8" th:href="@{/account/login}">로그인</a>  <!-- isAnonymous() : 로그인 하지 않은 경우 보인다. -->
             </div>
         </div>
     </div>
