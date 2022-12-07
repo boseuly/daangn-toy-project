@@ -14,7 +14,7 @@
         <p class="article-kind ps-1">중고거래</p>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <div class="col pt-0-pl-1" th:each="post : ${posts}">
-                    <a href="#" th:href="@{post/(pId=${post.postId})}">
+                    <a href="#" th:href="@{/post(pId=${post.postId})}">
                         <div class="card border-none">
                             <image class="border-rd-8 pd-img" src="/images/img_digital.png" th:src="@{${post.imgUrl}}"/>
                             <div class="card-body">

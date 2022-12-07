@@ -13,7 +13,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post, Integer> {
-    public List<Post> findByPostTitleContaining(String searchText);
+    public List<Post> findByPostTitleContainingAndUserIdContaining(String searchText, String sellerId);
+    List<Post> findByPostTitleContaining(String searchText);
 
     @Query(value = "select p from Post p " +
             "join fetch p.region r " +
