@@ -1,5 +1,6 @@
 package daangnmarket.daangntoyproject.post.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import daangnmarket.daangntoyproject.post.domain.Post;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,8 +8,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Getter
@@ -22,9 +25,11 @@ public class PostSaveDto {
 
     private String postContent;
 
-    private LocalDateTime createdAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private String createdAt;
 
-    private LocalDateTime updatedAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private String updatedAt;
 
     private String status;  // O : 진행중 , R : 예약중, C : 거래완료
 
@@ -49,7 +54,8 @@ public class PostSaveDto {
                 .postContent(postContent)
                 .price(Integer.parseInt(price.replaceAll(",", "")))
                 .proposalYn(proposalYn)
-                .createdAt(LocalDateTime.now())
+//                .createdAt(String.valueOf(LocalDateTime.parse(createdAt, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))))
+                .createdAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(LocalDateTime.now()))
                 .status("O")
                 .deletedYn("N")
                 .regionId(regionId)
@@ -64,8 +70,8 @@ public class PostSaveDto {
         this.postId = postEntity.get().getPostId();
         this.postTitle = postEntity.get().getPostTitle();
         this.postContent = postEntity.get().getPostContent();
-        this.createdAt = postEntity.get().getCreatedAt();
-        this.updatedAt = postEntity.get().getUpdatedAt();
+        this.createdAt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(postEntity.get().getCreatedAt());
+        this.updatedAt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(postEntity.get().getUpdatedAt());
         this.status = postEntity.get().getStatus();
         this.price = String.format("%,d", postEntity.get().getPrice());
         this.proposalYn = postEntity.get().getProposalYn();

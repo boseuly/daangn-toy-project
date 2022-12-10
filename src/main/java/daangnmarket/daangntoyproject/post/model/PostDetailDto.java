@@ -1,5 +1,6 @@
 package daangnmarket.daangntoyproject.post.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import daangnmarket.daangntoyproject.post.domain.Image;
 import daangnmarket.daangntoyproject.post.domain.Post;
 import daangnmarket.daangntoyproject.post.domain.Region;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,10 +28,10 @@ public class PostDetailDto {
     private String postTitle;
 
     private String postContent;
-
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private String createdAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    private String updatedAt;
 
     private String status;  // O : 진행중 , R : 예약중, C : 거래완료
 
@@ -62,8 +64,10 @@ public class PostDetailDto {
         this.postId = postEntity.getPostId();
         this.postTitle = postEntity.getPostTitle();
         this.postContent = postEntity.getPostContent();
-        this.createdAt = postEntity.getCreatedAt();
-        this.updatedAt = postEntity.getUpdatedAt();
+        this.createdAt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(postEntity.getCreatedAt());
+        if(updatedAt != null){
+            this.updatedAt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(postEntity.getUpdatedAt());
+        }
         this.status = postEntity.getStatus();
         this.price = String.format("%,d", postEntity.getPrice());
         this.proposalYn = postEntity.getProposalYn();
@@ -77,8 +81,10 @@ public class PostDetailDto {
         this.postId = postEntity.get().getPostId();
         this.postTitle = postEntity.get().getPostTitle();
         this.postContent = postEntity.get().getPostContent();
-        this.createdAt = postEntity.get().getCreatedAt();
-        this.updatedAt = postEntity.get().getUpdatedAt();
+        this.createdAt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(postEntity.get().getCreatedAt());
+        if(postEntity.get().getUpdatedAt() != null){
+            this.updatedAt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(postEntity.get().getUpdatedAt());
+        }
         this.status = postEntity.get().getStatus();
         this.price = String.format("%,d", postEntity.get().getPrice());
         this.proposalYn = postEntity.get().getProposalYn();

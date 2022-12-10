@@ -1,5 +1,6 @@
 package daangnmarket.daangntoyproject.post.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import daangnmarket.daangntoyproject.post.model.PostSaveDto;
 import daangnmarket.daangntoyproject.user.domain.User;
@@ -12,6 +13,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,7 @@ public class Post { // dynamicInsert와 dynamicUpdate는 null인 값은 제외�
     private String postContent;
 
     @Column(name = "created_at")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
@@ -86,7 +89,7 @@ public class Post { // dynamicInsert와 dynamicUpdate는 null인 값은 제외�
     @Builder
     public Post(int PostId, String postTitle, String postContent,
                 int price, String proposalYn, int regionId, int categoryId, String userId,
-                LocalDateTime createdAt, LocalDateTime updatedAt, String status, String deletedYn,
+                String createdAt, String updatedAt, String status, String deletedYn,
                 int viewCnt, int likeCnt) {
         if(postId != 0){
             this.postId = postId;
@@ -95,8 +98,9 @@ public class Post { // dynamicInsert와 dynamicUpdate는 null인 값은 제외�
         this.postContent = postContent;
         this.price = price;
         this.proposalYn = proposalYn;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");   // 파싱 오류 때문에 형식 지정
+        this.createdAt = LocalDateTime.parse(createdAt, formatter);
+        this.updatedAt = LocalDateTime.parse(updatedAt,formatter);
         this.status = status;
         this.deletedYn = deletedYn;
         this.viewCnt = viewCnt;
@@ -111,7 +115,8 @@ public class Post { // dynamicInsert와 dynamicUpdate는 null인 값은 제외�
         this.postContent = saveDto.getPostContent();
         this.price = Integer.parseInt(saveDto.getPrice().replaceAll(",", ""));
         this.proposalYn = saveDto.getProposalYn();
-        this.updatedAt = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");   // 파싱 오류 때문에 형식 지정
+        this.updatedAt = LocalDateTime.parse(saveDto.getUpdatedAt(),formatter);
         this.setRegion(saveDto.getRegionId());
         this.setCategory(saveDto.getCategoryId());
     }
