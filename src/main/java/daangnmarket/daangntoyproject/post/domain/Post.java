@@ -88,6 +88,7 @@ public class Post { // dynamicInsert와 dynamicUpdate는 null인 값은 제외�
                 int price, String proposalYn, int regionId, int categoryId, String userId,
                 LocalDateTime createdAt, LocalDateTime updatedAt, String status, String deletedYn,
                 int viewCnt, int likeCnt) {
+        // 구현하기
         if(postId != 0){
             this.postId = postId;
         }
