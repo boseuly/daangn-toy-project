@@ -23,14 +23,15 @@
                         </div>
 
                         <a href="#" class="list-group-item list-group-item-action border-0" th:each="chatRoom : ${chatRooms}">
-                            <div class="badge bg-success float-right" th:each="chatUser : ${chatUsers}">5</div>
-                            <div class="d-flex align-items-start">
-                                <img th:if="${(chatUser.userId != chatRoom.buyerId && chatUser.userId != chatRoom.sellerId) && (chatUser.userId == chatRoom.sellerId || chatUser.userId == chatRoom.buyerId)}" th:src="@{${chatUser.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-                                <div class="flex-grow-1 ml-3" th:if="${}" th:text="${chatUser.nickname}">
+                            <div th:each="chatUser : ${chatUsers}">
+                                <div class="d-flex align-items-start" th:if="(${chatUser.userId} != ${session.login.userId}) and (${chatUser.userId} == ${chatRoom.sellerId} or ${chatUser.userId} == ${chatRoom.buyerId})">
+                                    <img th:src="@{${chatUser.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
+                                    <div class="flex-grow-1 ml-3" th:text="${chatUser.nickname}">
+                                    </div>
+                                    <div>대화 내용</div>
                                 </div>
                             </div>
                         </a>
-
                         <hr class="d-block d-lg-none mt-1 mb-0">
                     </div>
                     <div class="col-12 col-lg-7 col-xl-9">

@@ -30,7 +30,7 @@ public class ChatService {
 
     public List<ChatContentDto> findChatContents(String buyerId , int pId) {
         logger.info("findChatContents - service(buyerId={}, pId={})", buyerId, pId);
-        // 여기부터 구현 - 만약 buyerId 와 pId에 해당하는 roomId가 없다면 room을 생성해준다.
+        // 만약 buyerId 와 pId에 해당하는 roomId가 없다면 room을 생성해준다.
         ChatRoomDto chatRoomDto = null;
         ChatRoom chatRoom = chatRoomRepository.findByBuyerIdAndPostId(buyerId, pId);
         if(chatRoom == null){
@@ -54,7 +54,7 @@ public class ChatService {
 
     // login 유저의 chatRooms 찾기
     public List<ChatRoomDto> findChatRooms(String buyerId) {
-        List<ChatRoom> chatRooms = new ArrayList<ChatRoom>();
+        List<ChatRoom> chatRooms = chatRoomRepository.findByBuyerIdOrSellerId(buyerId, buyerId);
         int idx = 0;
         List<ChatRoomDto> chatRoomDtos = new ArrayList<ChatRoomDto>();
         for (ChatRoom chatRoom : chatRooms){
