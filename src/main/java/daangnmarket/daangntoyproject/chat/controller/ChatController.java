@@ -39,6 +39,7 @@ public class ChatController {
         List<ChatContentDto> chatContentDtos = chatService.findChatContents(buyerId, pId);
         List<ChatRoomDto> chatRoomDtos = chatService.findChatRooms(buyerId);
         List<UserDto> chatUserDtos = userService.findChatUsers(chatRoomDtos);
+        logger.info("controller - chatContentDtos={}, chatRoomDtos={}, chatUserDtos={}", chatContentDtos, chatRoomDtos,chatUserDtos);
 
         model.addAttribute("chatUsers", chatUserDtos);
         model.addAttribute("chatContents", chatContentDtos);

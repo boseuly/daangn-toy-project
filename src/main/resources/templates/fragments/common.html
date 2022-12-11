@@ -44,12 +44,13 @@
                     <img th:if="${session.login != null}" th:src="@{${session.login.imgUrl}}" alt="mdo" width="32" height="32" class="rounded-circle">
                 </a>
                 <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                    <li th:if="${session.login != null}" th:text="${session.login.nickname} + ' 님의 당근'" style="margin-left: 10%;"></li>
+                    <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" th:href="@{/post/form}">글쓰기</a></li>
                     <li><a class="dropdown-item" th:href="@{/posts(userId=${session.login.userId})}">나의 당근</a></li>
                     <li><a class="dropdown-item" href="#">나의 페이지</a></li>
-                    <li><hr class="dropdown-divider"></li>
                     <li><form  class="form-inline my-2 my-lg-0" sec:authorize="isAuthenticated()" method="post"  th:action="@{/logout}">
-                        <button class="btn btn-sm" type="submit" style="margin-left: 5px;">Logout</button>
+                        <button class="btn btn-sm" type="submit" style="margin-left: 5px;">로그아웃</button>
                         </form>
                     </li>
                 </ul>
