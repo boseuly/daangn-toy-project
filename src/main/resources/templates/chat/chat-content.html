@@ -23,13 +23,17 @@
                         </div>
 
                         <a href="#" class="list-group-item list-group-item-action border-0" th:each="chatRoom : ${chatRooms}">
-                            <div th:each="chatUser : ${chatUsers}">
-                                <div class="d-flex align-items-start" th:if="(${chatUser.userId} != ${session.login.userId}) and (${chatUser.userId} == ${chatRoom.sellerId} or ${chatUser.userId} == ${chatRoom.buyerId})">
-                                    <img th:src="@{${chatUser.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-                                    <div class="flex-grow-1 ml-3" th:text="${chatUser.nickname}">
-                                    </div>
-                                    <div>대화 내용</div>
+                            <div class="d-flex align-items-start" th:if="${chatRoom.sellerId != session.login.userId}">
+                                <img th:src="@{${chatRoom.sellerUserDto.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
+                                <div class="flex-grow-1 ml-3" th:text="${chatRoom.sellerUserDto.nickname}">
                                 </div>
+                                <div>대화 내용</div>
+                            </div>
+                            <div class="d-flex align-items-start" th:if="${chatRoom.buyerId != session.login.userId}">
+                                <img th:src="@{${chatRoom.buyerUserDto.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
+                                <div class="flex-grow-1 ml-3" th:text="${chatRoom.buyerUserDto.nickname}">
+                                </div>
+                                <div>대화 내용</div>
                             </div>
                         </a>
                         <hr class="d-block d-lg-none mt-1 mb-0">
@@ -51,7 +55,7 @@
 
                                 <div class="chat-message-right pb-4">
                                     <div>
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                        <img th:src="@{/images/당근이1.png}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
                                         <div class="text-muted small text-nowrap mt-2">2:33 am</div>
                                     </div>
                                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">

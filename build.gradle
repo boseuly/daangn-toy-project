@@ -46,6 +46,8 @@ dependencies {
 	implementation 'com.sun.mail:javax.mail:1.6.2'
 	// 이미지 업로드
 	implementation 'commons-io:commons-io:2.11.0'
+	// websocket
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
 
 }

@@ -16,20 +16,5 @@ import java.util.List;
 @Service
 public class UserService {
     private static final Logger logger =  LoggerFactory.getLogger(ChatController.class);
-    @Autowired
-    private UserRepository userRepository;
 
-    public List<UserDto> findChatUsers(List<ChatRoomDto> chatRoomDtos){
-        List<String> userIdList = new ArrayList<>();
-        for(ChatRoomDto chatRoomDto:chatRoomDtos){
-            userIdList.add(chatRoomDto.getSellerId());
-            userIdList.add(chatRoomDto.getBuyerId());
-        }
-        List<UserDto> userDtos = new ArrayList<>();
-        List<User> userEntity = userRepository.findByUserIdIn(userIdList);
-        for(User user: userEntity){
-            userDtos.add(new UserDto(user));
-        }
-        return userDtos;
-    }
 }

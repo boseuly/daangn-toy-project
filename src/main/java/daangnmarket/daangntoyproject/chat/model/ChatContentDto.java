@@ -1,6 +1,7 @@
 package daangnmarket.daangntoyproject.chat.model;
 
 import daangnmarket.daangntoyproject.chat.domain.ChatContent;
+import daangnmarket.daangntoyproject.user.model.UserDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +21,10 @@ public class ChatContentDto {
     private String chatContent;
     private LocalDateTime createDate;
     private String checkYn;
+
+    private UserDto SellerUserDto;
+    private UserDto buyerUserDto;
+
 
     public ChatContentDto(ChatContent chatContent){
         this.chatId = chatContent.getChatId();

@@ -1,6 +1,7 @@
 package daangnmarket.daangntoyproject.chat.model;
 
 import daangnmarket.daangntoyproject.chat.domain.ChatRoom;
+import daangnmarket.daangntoyproject.user.model.UserDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,9 @@ public class ChatRoomDto {
     private int postId;
     private String sellerDeleteYn;
     private String buyerDeleteYn;
+
+    private UserDto sellerUserDto;
+    private UserDto buyerUserDto;
 
     public ChatRoomDto(ChatRoom chatRoom){
         this.roomId =  chatRoom.getRoomId();
