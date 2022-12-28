@@ -7,7 +7,10 @@ import daangnmarket.daangntoyproject.chat.model.ChatContentDto;
 import daangnmarket.daangntoyproject.chat.model.ChatRoomDto;
 import daangnmarket.daangntoyproject.chat.repository.ChatContentRepository;
 import daangnmarket.daangntoyproject.chat.repository.ChatRoomRepository;
+import daangnmarket.daangntoyproject.post.domain.Image;
 import daangnmarket.daangntoyproject.post.domain.Post;
+import daangnmarket.daangntoyproject.post.model.PostListDto;
+import daangnmarket.daangntoyproject.post.repository.ImageRepository;
 import daangnmarket.daangntoyproject.post.repository.PostRepository;
 import daangnmarket.daangntoyproject.user.domain.User;
 import daangnmarket.daangntoyproject.user.model.UserDto;
@@ -34,6 +37,9 @@ public class ChatService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private ImageRepository imageRepository;
+
     public List<ChatContentDto> findChatContents(String buyerId , int pId) {
         logger.info("findChatContents - service(buyerId={}, pId={})", buyerId, pId);
         // 만약 buyerId 와 pId에 해당하는 roomId가 없다면 room을 생성해준다.
@@ -59,24 +65,24 @@ public class ChatService {
     }
 
     // login 유저의 chatRooms 찾기
-    public List<ChatRoomDto> findChatRooms(String buyerId) {
+    public List<ChatRoomDto> findChatRooms(String loginId) {    // loginId가 포함된 모든 chatRoom을 찾아야 함
 
-        List<ChatRoom> chatRooms = chatRoomRepository.findByBuyerIdOrSellerId(buyerId, buyerId);
+        List<ChatRoom> chatRooms = chatRoomRepository.findByBuyerIdOrSellerId(loginId, loginId);
         List<ChatRoomDto> chatRoomDtos = new ArrayList<ChatRoomDto>();
+        int idx = 0;
         for (ChatRoom chatRoom : chatRooms){
-            chatRoomDtos.add(new ChatRoomDto(chatRoom));
+            chatRoomDtos.add(idx, new ChatRoomDto(chatRoom));
+            Image topImage = imageRepository.findByPostIdResultOne(chatRoom.getPostId());
+            chatRoomDtos.get(idx).setProdImgUrl(topImage.getImgUrl());
+            idx++;
         }
         // user객체 넣어야 됨
         List<UserDto> userDtos = findChatUsers(chatRoomDtos);
         logger.info("사용자 전달받음 userDtos={}", userDtos);
 
         for(int i = 0; i < chatRoomDtos.size(); i++){
-            logger.info("chatRoomDtos의 buyerId={}", chatRoomDtos.get(i).getBuyerId());
-            logger.info("chatRoomDtos의 sellerId={}", chatRoomDtos.get(i).getSellerId());
-
             for (int j = 0; j < userDtos.size(); j++){
                 logger.info("이중 for문 안");
-                logger.info("userDtos userId={}", userDtos.get(j).getUserId());
                 logger.info("chatRoomDtos의 buyerId={}", chatRoomDtos.get(i).getBuyerId());
                 logger.info("chatRoomDtos의 sellerId={}", chatRoomDtos.get(i).getSellerId());
 

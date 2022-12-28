@@ -1,6 +1,8 @@
 package daangnmarket.daangntoyproject.chat.model;
 
 import daangnmarket.daangntoyproject.chat.domain.ChatRoom;
+import daangnmarket.daangntoyproject.post.model.ImageDto;
+import daangnmarket.daangntoyproject.post.model.PostListDto;
 import daangnmarket.daangntoyproject.user.model.UserDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +23,7 @@ public class ChatRoomDto {
 
     private UserDto sellerUserDto;
     private UserDto buyerUserDto;
+    private String prodImgUrl;    // 제품 관련된 사진을 보여줄 때 필요 postId와 맞는 imageUrl을 찾아서 저장을 한다. 이때 사진은 하나만 가져온다.
 
     public ChatRoomDto(ChatRoom chatRoom){
         this.roomId =  chatRoom.getRoomId();
