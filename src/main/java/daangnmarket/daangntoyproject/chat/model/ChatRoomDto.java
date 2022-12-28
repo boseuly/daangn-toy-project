@@ -23,7 +23,7 @@ public class ChatRoomDto {
 
     private UserDto sellerUserDto;
     private UserDto buyerUserDto;
-    private String prodImgUrl;    // 제품 관련된 사진을 보여줄 때 필요 postId와 맞는 imageUrl을 찾아서 저장을 한다. 이때 사진은 하나만 가져온다.
+    private String prodImgUrl;    // 제품 관련된 사진을 보여줄 때 필요 postId와 맞는 imageUrl을 찾아서 대표 url을 저장을 한다.
 
     public ChatRoomDto(ChatRoom chatRoom){
         this.roomId =  chatRoom.getRoomId();
