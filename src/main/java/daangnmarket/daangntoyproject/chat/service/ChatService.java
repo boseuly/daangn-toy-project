@@ -40,14 +40,14 @@ public class ChatService {
     @Autowired
     private ImageRepository imageRepository;
 
-    public List<ChatContentDto> findChatContents(String buyerId , int pId) {
-        logger.info("findChatContents - service(buyerId={}, pId={})", buyerId, pId);
+    public List<ChatContentDto> findChatContents(String loginId , int pId) {
+        logger.info("findChatContents - service(buyerId={}, pId={})", loginId, pId);
         // 만약 buyerId 와 pId에 해당하는 roomId가 없다면 room을 생성해준다.
         ChatRoomDto chatRoomDto = null;
-        ChatRoom chatRoom = chatRoomRepository.findByBuyerIdAndPostId(buyerId, pId);
+        ChatRoom chatRoom = chatRoomRepository.findByBuyerIdOrSellerIdAndPostId(loginId,loginId, pId);  // buyerId나 sellerId가 loginId와 같아야 함
         if(chatRoom == null){
             Post postEntity = postRepository.findById(pId).orElse(null);   // sellerId 찾기
-            chatRoom = new ChatRoom(postEntity.getUserId(),buyerId, pId);       // 새로운 방을 만들어준 뒤
+            chatRoom = new ChatRoom(postEntity.getUserId(),loginId, pId);       // 새로운 방을 만들어준 뒤
             chatRoom =  chatRoomRepository.save(chatRoom);                      // entity 다시 받아옴
             chatRoomDto = new ChatRoomDto(chatRoom);
         }else {
@@ -55,7 +55,7 @@ public class ChatService {
         }
 
         List<ChatContentDto> chatContentDtos = new ArrayList<ChatContentDto>();
-        List<ChatContent> chatContents = chatContentRepository.findByBuyerIdAndRoomIdOrderByCreateDate(buyerId, chatRoomDto.getRoomId());
+        List<ChatContent> chatContents = chatContentRepository.findByBuyerIdAndRoomIdOrderByCreateDate(loginId, chatRoomDto.getRoomId());
         int idx = 0;
         for (ChatContent content:chatContents){
             chatContentDtos.add(idx, new ChatContentDto(content));

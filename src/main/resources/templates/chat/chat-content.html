@@ -21,67 +21,51 @@
                                 </div>
                             </div>
                         </div>
-                        <a th:href="@{/chat(loginId=${session.login.userId}, pId=${chatRoom.postId})}" class="list-group-item list-group-item-action border-0" th:each="chatRoom : ${chatRooms}">
+                        <a th:href="@{/chat(loginId=${session.login.userId}, pId=${chatRoom.postId})}" th:each="chatRoom : ${chatRooms}" class="list-group-item list-group-item-action border-0">
                             <div class="d-flex align-items-start" th:if="${chatRoom.sellerId != session.login.userId}">
+
                                 <img th:src="@{${chatRoom.sellerUserDto.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                 <div class="flex-grow-1 ml-3" style="margin: 5px;" th:text="${chatRoom.sellerUserDto.nickname}">
                                 </div>
-                                <img th:src="@{${chatRoom.prodImgUrl}}" style="width:40px; height: 40px;">
+                                <img th:src="@{${chatRoom.prodImgUrl}}" style="width:40px; height: 40px; border-radius: 10%;">
                             </div>
                             <div class="d-flex align-items-start" th:if="${chatRoom.buyerId != session.login.userId}">
                                 <img th:src="@{${chatRoom.buyerUserDto.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                 <div class="flex-grow-1 ml-3" style="margin: 5px;" th:text="${chatRoom.buyerUserDto.nickname}">
                                 </div>
-                                <img th:src="@{${chatRoom.prodImgUrl}}" style="width:40px; height: 40px;">
+                                <img th:src="@{${chatRoom.prodImgUrl}}" style="width:40px; height: 40px; border-radius: 10%;">
                             </div>
                         </a>
                         <hr class="d-block d-lg-none mt-1 mb-0">
                     </div>
                     <div class="col-12 col-lg-7 col-xl-9">
-                        <div class="py-2 px-4 border-bottom d-none d-lg-block">
-                            <div class="d-flex align-items-center py-1" th:if="${chatRoom.postId == postId}" th:each="chatRoom : ${chatRooms}">
-                                <div class="position-relative">
-                                    <img th:if="${chatRoom.buyerId != session.login.userId}" th:src="${chatRoom.buyerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
-                                    <img th:if="${chatRoom.sellerId != session.login.userId}" th:src="${chatRoom.sellerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
-                                </div>
-                                <div class="flex-grow-1 pl-3" style="margin-left: 10px;">
-                                    <strong th:if="${chatRoom.buyerId != session.login.userId}" th:text="${chatRoom.buyerUserDto.nickname}"></strong>
-                                    <strong th:if="${chatRoom.sellerId != session.login.userId}" th:text="${chatRoom.sellerUserDto.nickname}"></strong>
+                        <div class="py-2 px-4 border-bottom d-none d-lg-block" th:if="${postId != null}">
+                            <div th:each="chatRoom : ${chatRooms}" th:if="${chatRoom.postId == postId}">
+                                <div class="d-flex align-items-center py-1">
+                                    <div class="position-relative">
+                                        <img th:if="${chatRoom.buyerId != session.login.userId}" th:src="${chatRoom.buyerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
+                                        <img th:if="${chatRoom.sellerId != session.login.userId}" th:src="${chatRoom.sellerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
+                                    </div>
+                                    <div class="flex-grow-1 pl-3" style="margin-left: 10px;">
+                                        <strong th:if="${chatRoom.buyerId != session.login.userId}" th:text="${chatRoom.buyerUserDto.nickname}"></strong>
+                                        <strong th:if="${chatRoom.sellerId != session.login.userId}" th:text="${chatRoom.sellerUserDto.nickname}"></strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="position-relative">
                             <div class="chat-messages p-4" id="msgArea">
-                                    <!-- 대화 내용 -->
-<!--                                <div class="chat-message-right pb-4">-->
-<!--                                    <div>-->
-<!--                                        <img th:src="@{/images/당근이1.png}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">-->
-<!--                                        <div class="text-muted small text-nowrap mt-2">2:33 am</div>-->
-<!--                                    </div>-->
-<!--                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3" id="msg">-->
-<!--                                        지금 바로 거래 가능 한가요?-->
-<!--                                    </div>-->
-<!--                                </div>-->
-
-<!--                                <div class="chat-message-left pb-4">-->
-<!--                                    <div>-->
-<!--                                        <img th:src="@{/images/당근이1.png}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">-->
-<!--                                        <div class="text-muted small text-nowrap mt-2">오후 4:30</div>-->
-<!--                                    </div>-->
-<!--                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">-->
-<!--                                        네 가능 합니다.-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                  <!-- 대화내용 -->
                             </div>
                         </div>
                         <div class="flex-grow-0 py-3 px-4 border-top">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="input-msg" placeholder="메시지 입력하기">
+                                <input th:if="${postId != null}" type="text" class="form-control" id="input-msg" placeholder="메시지 입력하기">
+                                <input th:if="${postId == null}" type="text" class="form-control" placeholder="메시지 입력하기" disabled>
                                 <button class="btn" id="button-send">전송</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
