@@ -26,27 +26,29 @@
                                 <img th:src="@{${chatRoom.sellerUserDto.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                 <div class="flex-grow-1 ml-3" style="margin: 5px;" th:text="${chatRoom.sellerUserDto.nickname}">
                                 </div>
-                                <img th:src="@{${chatRoom.prodImgUrl}}" style="width:40px; height: 40px;">
+                                <img th:src="@{${chatRoom.prodImgUrl}}" style="width:40px; height: 40px; border-radius: 10%;">
                             </div>
                             <div class="d-flex align-items-start" th:if="${chatRoom.buyerId != session.login.userId}">
                                 <img th:src="@{${chatRoom.buyerUserDto.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                 <div class="flex-grow-1 ml-3" style="margin: 5px;" th:text="${chatRoom.buyerUserDto.nickname}">
                                 </div>
-                                <img th:src="@{${chatRoom.prodImgUrl}}" style="width:40px; height: 40px;">
+                                <img th:src="@{${chatRoom.prodImgUrl}}" style="width:40px; height: 40px; border-radius: 10%;">
                             </div>
                         </a>
                         <hr class="d-block d-lg-none mt-1 mb-0">
                     </div>
                     <div class="col-12 col-lg-7 col-xl-9">
                         <div class="py-2 px-4 border-bottom d-none d-lg-block">
-                            <div class="d-flex align-items-center py-1" th:if="${chatRoom.postId == postId}" th:each="chatRoom : ${chatRooms}">
-                                <div class="position-relative">
-                                    <img th:if="${chatRoom.buyerId != session.login.userId}" th:src="${chatRoom.buyerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
-                                    <img th:if="${chatRoom.sellerId != session.login.userId}" th:src="${chatRoom.sellerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
-                                </div>
-                                <div class="flex-grow-1 pl-3" style="margin-left: 10px;">
-                                    <strong th:if="${chatRoom.buyerId != session.login.userId}" th:text="${chatRoom.buyerUserDto.nickname}"></strong>
-                                    <strong th:if="${chatRoom.sellerId != session.login.userId}" th:text="${chatRoom.sellerUserDto.nickname}"></strong>
+                            <div th:each="chatRoom : ${chatRooms}">
+                                <div class="d-flex align-items-center py-1" th:if="${chatRoom.postId == postId}">
+                                    <div class="position-relative">
+                                        <img th:if="${chatRoom.buyerId != session.login.userId}" th:src="${chatRoom.buyerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
+                                        <img th:if="${chatRoom.sellerId != session.login.userId}" th:src="${chatRoom.sellerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
+                                    </div>
+                                    <div class="flex-grow-1 pl-3" style="margin-left: 10px;">
+                                        <strong th:if="${chatRoom.buyerId != session.login.userId}" th:text="${chatRoom.buyerUserDto.nickname}"></strong>
+                                        <strong th:if="${chatRoom.sellerId != session.login.userId}" th:text="${chatRoom.sellerUserDto.nickname}"></strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>

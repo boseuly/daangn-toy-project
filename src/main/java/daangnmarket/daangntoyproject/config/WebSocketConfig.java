@@ -15,8 +15,9 @@ public class WebSocketConfig implements WebSocketConfigurer {
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(chatHandler, "ws/chat")
                 .setAllowedOriginPatterns("http://*:8080", "http://*.*.*.*:8080");   // 보안상의 문제로 "*"(모두허용)보다는 하나씩 지정해주는 것이 좋다.
+//                .withSockJS();                                                          // javaConfig를 통해서 sockJS를 사용할 수 있도록 설정함
+//                .setAllowedOrigins("http://localhost:8080")
 //                .setAllowedOrigins("*");
-//                .withSockJS()                                                       // javaConfig를 통해서 sockJS를 사용할 수 있도록 설정함
 //                .setClientLibraryUrl("https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js");
                 //.setClientLibarayUrl은 그냥 sockjs CDN 주소를 입력해도 무관하다.
                 //https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.2/sockjs.js
