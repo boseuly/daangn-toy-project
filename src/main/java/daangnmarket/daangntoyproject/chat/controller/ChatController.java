@@ -30,7 +30,7 @@ public class ChatController {
 
         if(postId != null){
             List<ChatContentDto> chatContentDtos = chatService.findChatContents(loginId, Integer.parseInt(postId));
-            model.addAttribute("postId", postId);
+            model.addAttribute("postId", Integer.parseInt(postId));
             model.addAttribute("chatContents", chatContentDtos);
         }
 

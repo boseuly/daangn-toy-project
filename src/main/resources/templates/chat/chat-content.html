@@ -39,9 +39,9 @@
                         <hr class="d-block d-lg-none mt-1 mb-0">
                     </div>
                     <div class="col-12 col-lg-7 col-xl-9">
-                        <div class="py-2 px-4 border-bottom d-none d-lg-block">
-                            <div th:each="chatRoom : ${chatRooms}">
-                                <div class="d-flex align-items-center py-1" th:if="${chatRoom.postId == postId}">
+                        <div class="py-2 px-4 border-bottom d-none d-lg-block" th:if="${postId != null}">
+                            <div th:each="chatRoom : ${chatRooms}" th:if="${chatRoom.postId == postId}">
+                                <div class="d-flex align-items-center py-1">
                                     <div class="position-relative">
                                         <img th:if="${chatRoom.buyerId != session.login.userId}" th:src="${chatRoom.buyerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
                                         <img th:if="${chatRoom.sellerId != session.login.userId}" th:src="${chatRoom.sellerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
@@ -61,7 +61,8 @@
                         </div>
                         <div class="flex-grow-0 py-3 px-4 border-top">
                             <div class="input-group">
-                                <input type="text" class="form-control" id="input-msg" placeholder="메시지 입력하기">
+                                <input th:if="${postId != null}" type="text" class="form-control" id="input-msg" placeholder="메시지 입력하기">
+                                <input th:if="${postId == null}" type="text" class="form-control" placeholder="메시지 입력하기" disabled>
                                 <button class="btn" id="button-send">전송</button>
                             </div>
                         </div>
