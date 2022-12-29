@@ -21,8 +21,9 @@
                                 </div>
                             </div>
                         </div>
-                        <a th:href="@{/chat(loginId=${session.login.userId}, pId=${chatRoom.postId})}" class="list-group-item list-group-item-action border-0" th:each="chatRoom : ${chatRooms}">
+                        <a th:href="@{/chat(loginId=${session.login.userId}, pId=${chatRoom.postId})}" th:each="chatRoom : ${chatRooms}" class="list-group-item list-group-item-action border-0">
                             <div class="d-flex align-items-start" th:if="${chatRoom.sellerId != session.login.userId}">
+
                                 <img th:src="@{${chatRoom.sellerUserDto.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
                                 <div class="flex-grow-1 ml-3" style="margin: 5px;" th:text="${chatRoom.sellerUserDto.nickname}">
                                 </div>
@@ -55,26 +56,7 @@
 
                         <div class="position-relative">
                             <div class="chat-messages p-4" id="msgArea">
-                                    <!-- 대화 내용 -->
-<!--                                <div class="chat-message-right pb-4">-->
-<!--                                    <div>-->
-<!--                                        <img th:src="@{/images/당근이1.png}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">-->
-<!--                                        <div class="text-muted small text-nowrap mt-2">2:33 am</div>-->
-<!--                                    </div>-->
-<!--                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3" id="msg">-->
-<!--                                        지금 바로 거래 가능 한가요?-->
-<!--                                    </div>-->
-<!--                                </div>-->
-
-<!--                                <div class="chat-message-left pb-4">-->
-<!--                                    <div>-->
-<!--                                        <img th:src="@{/images/당근이1.png}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">-->
-<!--                                        <div class="text-muted small text-nowrap mt-2">오후 4:30</div>-->
-<!--                                    </div>-->
-<!--                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">-->
-<!--                                        네 가능 합니다.-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                  <!-- 대화내용 -->
                             </div>
                         </div>
                         <div class="flex-grow-0 py-3 px-4 border-top">
@@ -83,7 +65,6 @@
                                 <button class="btn" id="button-send">전송</button>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

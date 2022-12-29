@@ -23,15 +23,18 @@ public class ChatController {
     private ChatService chatService;
 
     @GetMapping(value = "/chat")
-    public String chat (@RequestParam(value = "loginId") String loginId,            // sellerId는 postId를 통해서 알 수 있음
-                        @RequestParam(value = "pId", required = false) int postId,  // 채팅 목록만 나오도록 하는 경우
+    public String chat (@RequestParam(value = "loginId") String loginId,                // sellerId는 postId를 통해서 알 수 있음
+                        @RequestParam(value = "pId", required = false) String postId,   // 채팅 목록만 나오도록 하는 경우
                         Model model){
         logger.info("chatController(buyerId={}, postId={})", loginId, postId);
-        List<ChatContentDto> chatContentDtos = chatService.findChatContents(loginId, postId);
-        List<ChatRoomDto> chatRoomDtos = chatService.findChatRooms(loginId);
 
-        model.addAttribute("postId", postId);
-        model.addAttribute("chatContents", chatContentDtos);
+        if(postId != null){
+            List<ChatContentDto> chatContentDtos = chatService.findChatContents(loginId, Integer.parseInt(postId));
+            model.addAttribute("postId", postId);
+            model.addAttribute("chatContents", chatContentDtos);
+        }
+
+        List<ChatRoomDto> chatRoomDtos = chatService.findChatRooms(loginId);
         model.addAttribute("chatRooms", chatRoomDtos);
         return "/chat/chat-content";
     }
