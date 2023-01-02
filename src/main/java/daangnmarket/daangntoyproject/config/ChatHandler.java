@@ -1,5 +1,7 @@
 package daangnmarket.daangntoyproject.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import daangnmarket.daangntoyproject.chat.domain.ChatMessage;
 import daangnmarket.daangntoyproject.chat.service.ChatService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +20,19 @@ public class ChatHandler extends TextWebSocketHandler { // text 기반의 채팅
     @Autowired
     private ChatService chatService;
     private static List<WebSocketSession> list = new ArrayList<>();
-
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        String payload = message.getPayload();
-        log.info("전달 메시지 내용 payload : " + payload);   // payload : 전송되는 데이터를 의미. JSON에서 페이로드는 data이다.
+        String msg = message.getPayload();
+        log.info("전달 메시지 내용 message : " + msg);   // payload : 전송되는 데이터를 의미. JSON에서 페이로드는 data이다.
+        // Json 객체 -> Java 객체
+        ChatMessage chatMessage = objectMapper.readValue(msg, ChatMessage.class);
+        log.info("chatMessage 객체 : " + chatMessage);
 
+        TextMessage textMessage = new TextMessage(chatMessage.getRoomId() + "," + chatMessage.getMessage() + "," + chatMessage.getUserId());
         for(WebSocketSession sess: list) {
-            sess.sendMessage(message);
+            sess.sendMessage(textMessage);
         }
     }
 

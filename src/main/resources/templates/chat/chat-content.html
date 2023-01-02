@@ -17,7 +17,8 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1">
                                     <input type="text" class="form-control my-3" placeholder="검색">
-                                    <p id="login-nickname" th:text="${session.login.nickname}" style="color: white; margin-bottom: 0px"></p>
+                                    <input type="hidden" hidden id="login-nickname" th:value="${session.login.nickname}">
+                                    <input type="hidden" hidden id="loginId" th:value="${session.login.userId}">
                                 </div>
                             </div>
                         </div>
@@ -47,6 +48,7 @@
                                         <img th:if="${chatRoom.sellerId != session.login.userId}" th:src="${chatRoom.sellerUserDto.imgUrl}" class="rounded-circle mr-1" width="40" height="40">
                                     </div>
                                     <div class="flex-grow-1 pl-3" style="margin-left: 10px;">
+                                        <input type="hidden" hidden th:value="${chatRoom.roomId}" id="roomId">
                                         <strong th:if="${chatRoom.buyerId != session.login.userId}" th:text="${chatRoom.buyerUserDto.nickname}"></strong>
                                         <strong th:if="${chatRoom.sellerId != session.login.userId}" th:text="${chatRoom.sellerUserDto.nickname}"></strong>
                                     </div>
@@ -56,7 +58,28 @@
 
                         <div class="position-relative">
                             <div class="chat-messages p-4" id="msgArea">
-                                  <!-- 대화내용 -->
+                                  <!-- 대화내용 이전 내용을 먼저 보여줘야 한다. -->
+                                <!--
+                                <div class="chat-message-right pb-4">
+                                    <div>
+                                        <img th:src="@{/images/당근이1.png}" class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
+                                        <div class="text-muted small text-nowrap mt-2">2:33 am</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3" id="msg">
+                                        지금 바로 거래 가능 한가요?
+                                    </div>
+                                </div>
+
+                                <div class="chat-message-left pb-4">
+                                    <div>
+                                        <img th:src="@{/images/당근이1.png}" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                                        <div class="text-muted small text-nowrap mt-2">오후 4:30</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 ml-3">
+                                        네 가능 합니다.
+                                    </div>
+                                </div>
+                                -->
                             </div>
                         </div>
                         <div class="flex-grow-0 py-3 px-4 border-top">

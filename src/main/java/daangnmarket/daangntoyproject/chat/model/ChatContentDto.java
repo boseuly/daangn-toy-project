@@ -16,21 +16,18 @@ import java.time.LocalDateTime;
 public class ChatContentDto {
     private int chatId;
     private int roomId;
-    private String sellerId;  // 보낸 사람
-    private String buyerId;    // 받은 사람
+    private String userId;  // 보낸 사람
     private String chatContent;
     private LocalDateTime createDate;
     private String checkYn;
 
-    private UserDto SellerUserDto;
-    private UserDto buyerUserDto;
+    private UserDto UserDto;
 
 
     public ChatContentDto(ChatContent chatContent){
         this.chatId = chatContent.getChatId();
         this.roomId = chatContent.getRoomId();
-        this.sellerId = chatContent.getSellerId();
-        this.buyerId = chatContent.getBuyerId();
+        this.userId = chatContent.getUserId();
         this.chatContent = chatContent.getChatContent();
         this.createDate = chatContent.getCreateDate();
         this.checkYn = chatContent.getCheckYn();
@@ -39,8 +36,7 @@ public class ChatContentDto {
     public ChatContent toEntity(){
         return ChatContent.builder()
                 .roomId(roomId)
-                .sellerId(sellerId)
-                .buyerId(buyerId)
+                .userId(userId)
                 .chatContent(chatContent)
                 .createDate(createDate)
                 .checkYn(checkYn)
