@@ -55,7 +55,7 @@ public class ChatService {
         }
 
         List<ChatContentDto> chatContentDtos = new ArrayList<ChatContentDto>();
-        List<ChatContent> chatContents = chatContentRepository.findByBuyerIdAndRoomIdOrderByCreateDate(loginId, chatRoomDto.getRoomId());
+        List<ChatContent> chatContents = chatContentRepository.findByUserIdAndRoomIdOrderByCreateDate(loginId, chatRoomDto.getRoomId());
         int idx = 0;
         for (ChatContent content:chatContents){
             chatContentDtos.add(idx, new ChatContentDto(content));

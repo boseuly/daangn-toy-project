@@ -17,6 +17,9 @@ import java.util.List;
 @Controller
 @Log4j2
 public class ChatController {
+    /*
+    https://retrieverj.tistory.com/23 : db 저장
+     */
 
     private static final Logger logger =  LoggerFactory.getLogger(ChatController.class);
     @Autowired
