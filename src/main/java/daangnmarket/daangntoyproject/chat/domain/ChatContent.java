@@ -48,4 +48,9 @@ public class ChatContent {
         this.createDate = createDate;
         this.checkYn = checkYn;
     }
+    public ChatContent(int roomId, String userId, String chatContent){
+        this.roomId = roomId;
+        this.userId = userId;
+        this.chatContent = chatContent;
+    }
 }
