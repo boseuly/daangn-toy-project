@@ -1,6 +1,7 @@
 package daangnmarket.daangntoyproject.chat.model;
 
 import daangnmarket.daangntoyproject.chat.domain.ChatContent;
+import daangnmarket.daangntoyproject.chat.domain.ChatMessage;
 import daangnmarket.daangntoyproject.user.model.UserDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,11 @@ public class ChatContentDto {
         this.chatContent = chatContent.getChatContent();
         this.createDate = chatContent.getCreateDate();
         this.checkYn = chatContent.getCheckYn();
+    }
+    public ChatContentDto(ChatMessage chatMessage){
+        this.roomId = chatMessage.getRoomId();
+        this.userId = chatMessage.getUserId();
+        this.chatContent = chatMessage.getMessage();
     }
 
     public ChatContent toEntity(){

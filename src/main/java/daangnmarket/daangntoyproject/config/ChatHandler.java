@@ -2,6 +2,7 @@ package daangnmarket.daangntoyproject.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import daangnmarket.daangntoyproject.chat.domain.ChatMessage;
+import daangnmarket.daangntoyproject.chat.repository.ChatContentRepository;
 import daangnmarket.daangntoyproject.chat.service.ChatService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,10 @@ public class ChatHandler extends TextWebSocketHandler { // text 기반의 채팅
         // Json 객체 -> Java 객체
         ChatMessage chatMessage = objectMapper.readValue(msg, ChatMessage.class);
         log.info("chatMessage 객체 : " + chatMessage);
+
+        // 채팅 메시지 DB 저장
+        chatService.saveChatContent(chatMessage);
+        log.info("DB 저장 후 chatMessage : " + chatMessage);
 
         TextMessage textMessage = new TextMessage(chatMessage.getRoomId() + "," + chatMessage.getMessage() + "," + chatMessage.getUserId());
         for(WebSocketSession sess: list) {

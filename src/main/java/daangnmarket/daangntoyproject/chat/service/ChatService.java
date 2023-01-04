@@ -2,6 +2,7 @@ package daangnmarket.daangntoyproject.chat.service;
 
 import daangnmarket.daangntoyproject.chat.controller.ChatController;
 import daangnmarket.daangntoyproject.chat.domain.ChatContent;
+import daangnmarket.daangntoyproject.chat.domain.ChatMessage;
 import daangnmarket.daangntoyproject.chat.domain.ChatRoom;
 import daangnmarket.daangntoyproject.chat.model.ChatContentDto;
 import daangnmarket.daangntoyproject.chat.model.ChatRoomDto;
@@ -19,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.TextMessage;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -55,10 +57,15 @@ public class ChatService {
         }
 
         List<ChatContentDto> chatContentDtos = new ArrayList<ChatContentDto>();
-        List<ChatContent> chatContents = chatContentRepository.findByUserIdAndRoomIdOrderByCreateDate(loginId, chatRoomDto.getRoomId());
+        // 해당 roomId에 해당하는 content는 다 가져와야 한다.
+        List<ChatContent> chatContents = chatContentRepository.findByRoomIdOrderByCreateDate(chatRoomDto.getRoomId());
         int idx = 0;
         for (ChatContent content:chatContents){
             chatContentDtos.add(idx, new ChatContentDto(content));
+            // user정보 넣어주기
+            User user = userRepository.findById(content.getUserId()).orElse(null);
+            UserDto userDto = new UserDto(user);
+            chatContentDtos.get(idx).setUserDto(userDto);
             idx++;
         }
         return chatContentDtos;
@@ -82,10 +89,6 @@ public class ChatService {
 
         for(int i = 0; i < chatRoomDtos.size(); i++){
             for (int j = 0; j < userDtos.size(); j++){
-                logger.info("이중 for문 안");
-                logger.info("chatRoomDtos의 buyerId={}", chatRoomDtos.get(i).getBuyerId());
-                logger.info("chatRoomDtos의 sellerId={}", chatRoomDtos.get(i).getSellerId());
-
                 if(chatRoomDtos.get(i).getBuyerId().equals(userDtos.get(j).getUserId())){
                     chatRoomDtos.get(i).setBuyerUserDto(userDtos.get(j));
                     logger.info("사용자 buyer 넣어줌 - chatRoomDtos={}", chatRoomDtos.get(i));
@@ -125,5 +128,19 @@ public class ChatService {
         logger.info("중복제거 findChatUsers(userDtos={})", userDtos);
 
         return userDtos;
+    }
+
+    // 채팅 내용 저장하기 -> roomId, userId, content 저장
+    public void saveChatContent(ChatMessage chatMessage) {
+        // 메시지를 저장해줘야 함
+        ChatContent chatContent = new ChatContent(chatMessage.getRoomId(), chatMessage.getUserId(), chatMessage.getMessage());
+        ChatContent result = chatContentRepository.save(chatContent);
+        if(result == null){
+            chatMessage.setResult(false);   // 저장 실패
+        }else {
+            User user = userRepository.findById(chatMessage.getUserId()).orElse(null);
+            chatMessage.setResult(true);    // 저장 성공
+            chatMessage.setImgUrl(user.getImgUrl());
+        }
     }
 }
