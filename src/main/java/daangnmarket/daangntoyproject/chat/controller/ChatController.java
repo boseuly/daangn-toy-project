@@ -19,6 +19,7 @@ import java.util.List;
 public class ChatController {
     /*
     https://retrieverj.tistory.com/23 : db 저장
+    https://dalili.tistory.com/125 : 채팅방 구분
      */
 
     private static final Logger logger =  LoggerFactory.getLogger(ChatController.class);
