@@ -13,7 +13,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     // connection을 맺을때 CORS 허용
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(chatHandler, "ws/chat")
+        registry.addHandler(chatHandler, "ws/chat/{id}")    // 채팅방을 구분해주기 위해서 {id} 넣어줌
                 .setAllowedOriginPatterns("http://*:8080", "http://*.*.*.*:8080");   // 보안상의 문제로 "*"(모두허용)보다는 하나씩 지정해주는 것이 좋다.
 //                .withSockJS();                                                          // javaConfig를 통해서 sockJS를 사용할 수 있도록 설정함
 //                .setAllowedOrigins("http://localhost:8080")
