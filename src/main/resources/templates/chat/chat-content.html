@@ -24,16 +24,13 @@
                         </div>
                         <a th:href="@{/chat(loginId=${session.login.userId}, pId=${chatRoom.postId})}" th:each="chatRoom : ${chatRooms}" class="list-group-item list-group-item-action border-0">
                             <div class="d-flex align-items-start" th:if="${chatRoom.sellerId != session.login.userId}">
-
                                 <img th:src="@{${chatRoom.sellerUserDto.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-                                <div class="flex-grow-1 ml-3" style="margin: 5px;" th:text="${chatRoom.sellerUserDto.nickname}">
-                                </div>
+                                <div class="flex-grow-1 ml-3" style="margin: 5px;" th:text="${chatRoom.sellerUserDto.nickname}"></div>
                                 <img th:src="@{${chatRoom.prodImgUrl}}" style="width:40px; height: 40px; border-radius: 10%;">
                             </div>
                             <div class="d-flex align-items-start" th:if="${chatRoom.buyerId != session.login.userId}">
                                 <img th:src="@{${chatRoom.buyerUserDto.imgUrl}}" class="rounded-circle mr-1" alt="Vanessa Tucker" width="40" height="40">
-                                <div class="flex-grow-1 ml-3" style="margin: 5px;" th:text="${chatRoom.buyerUserDto.nickname}">
-                                </div>
+                                <div class="flex-grow-1 ml-3" style="margin: 5px;" th:text="${chatRoom.buyerUserDto.nickname}"></div>
                                 <img th:src="@{${chatRoom.prodImgUrl}}" style="width:40px; height: 40px; border-radius: 10%;">
                             </div>
                         </a>
@@ -92,5 +89,6 @@
         </div>
     </main>
     <script th:src="@{/js/chat/chat.js}"></script>
+    <script th:src="@{/js/chat/room-out.js}"></script>
 </body>
 </html>

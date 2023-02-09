@@ -80,7 +80,7 @@ public class ChatService {
         for (ChatRoom chatRoom : chatRooms){
             chatRoomDtos.add(idx, new ChatRoomDto(chatRoom));
             Image topImage = imageRepository.findByPostIdResultOne(chatRoom.getPostId());
-            chatRoomDtos.get(idx).setProdImgUrl(topImage.getImgUrl());
+            chatRoomDtos.get(idx).setProdImgUrl(topImage.getImgUrl());  // 만약 게시글이 삭제되면 NullPointException 발생
             idx++;
         }
         // user객체 넣어야 됨
