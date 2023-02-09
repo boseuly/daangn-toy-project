@@ -104,6 +104,7 @@ public class PostController {
     @DeleteMapping(value = "/post")
     @ResponseBody
     public ResponseEntity<Object> delete(@RequestParam(value = "pId")int pId){
+        // 관련
         return postService.deletePost(pId);
     }
 
