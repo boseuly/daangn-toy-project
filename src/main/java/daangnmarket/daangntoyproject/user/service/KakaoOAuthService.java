@@ -40,7 +40,7 @@ public class KakaoOAuthService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=3b9ab37490257b10f89f741a7912ceb7");       // TODO REST_API_KEY 입력
-            sb.append("&redirect_uri=http://localhost:8080/oauth/kakao");   // TODO 인가코드 받은 redirect_uri 입력
+            sb.append("&redirect_uri=http://43.201.5.60:8085/oauth/kakao");   // TODO 인가코드 받은 redirect_uri 입력 배포될 uri로 작성
             sb.append("&code=" + code);
 
             bw.write(sb.toString());
